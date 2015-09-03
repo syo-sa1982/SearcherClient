@@ -11,6 +11,9 @@ public class UUIDManager : MonoBehaviour
 			System.Guid guid = System.Guid.NewGuid();
 			_uuid = guid.ToString();
 		}
+		Debug.Log ("awake");
+		Debug.Log (_uuid);
+
 	}
 
 	// Use this for initialization
@@ -25,20 +28,36 @@ public class UUIDManager : MonoBehaviour
 	
 	}
 
-	public IEnumerator AddNewUser()
-	{
-	}
-
 	public void Save()
 	{
-		if (PlayerPrefs.HasKey ("uuid")) {
-			Debug.Log ("持ってる");
-			return;
-		}
+		Debug.Log ("Save");
+		Debug.Log (_uuid);
 
 		PlayerPrefs.SetString("uuid",_uuid);
 		PlayerPrefs.Save();
+
+		StartCoroutine(AddNewUser());
+	
 	}
+
+	public IEnumerator AddNewUser()
+	{
+		Debug.Log ("AddNewUser");
+		Debug.Log (_uuid);
+
+		string url = "http://localhost:8000/user/add";
+		WWWForm wwwForm = new WWWForm ();
+
+		wwwForm.AddField ("uuid", _uuid);
+		wwwForm.AddField ("roll_count", "3");
+
+		WWW www = new WWW(url, wwwForm);
+
+		yield return www;
+	}
+
+
+
 
 	public void Load()
 	{
