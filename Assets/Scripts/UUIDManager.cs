@@ -7,8 +7,10 @@ public class UUIDManager : MonoBehaviour
 
 	void Awake()
 	{
-		System.Guid guid = System.Guid.NewGuid();
-		_uuid = guid.ToString();
+		if (!PlayerPrefs.HasKey ("uuid")) {
+			System.Guid guid = System.Guid.NewGuid();
+			_uuid = guid.ToString();
+		}
 	}
 
 	// Use this for initialization
@@ -21,6 +23,10 @@ public class UUIDManager : MonoBehaviour
 	void Update () 
 	{
 	
+	}
+
+	public IEnumerator AddNewUser()
+	{
 	}
 
 	public void Save()
