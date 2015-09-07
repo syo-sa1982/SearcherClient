@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 
 public class UUIDManager : MonoBehaviour 
 {
 	private string _uuid;
 
+	[SerializeField]
+	private InputField nameField;
+
 	void Awake()
 	{
-		if (!PlayerPrefs.HasKey ("uuid")) {
-			System.Guid guid = System.Guid.NewGuid();
-			_uuid = guid.ToString();
-		}
 		Debug.Log ("awake");
 		Debug.Log (_uuid);
 
@@ -30,8 +30,14 @@ public class UUIDManager : MonoBehaviour
 
 	public void Save()
 	{
+		if (!PlayerPrefs.HasKey ("uuid")) {
+			System.Guid guid = System.Guid.NewGuid();
+			_uuid = guid.ToString();
+		}
 		Debug.Log ("Save");
 		Debug.Log (_uuid);
+		Debug.Log (nameField);
+
 
 		PlayerPrefs.SetString("uuid",_uuid);
 		PlayerPrefs.Save();
@@ -49,9 +55,11 @@ public class UUIDManager : MonoBehaviour
 		WWWForm wwwForm = new WWWForm ();
 
 		wwwForm.AddField ("uuid", _uuid);
+		wwwForm.AddField ("name", nameField.text);
 		wwwForm.AddField ("roll_count", "3");
 
 		WWW www = new WWW(url, wwwForm);
+		Debug.Log (www);
 
 		yield return www;
 	}
