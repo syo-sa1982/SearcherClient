@@ -52,16 +52,25 @@ public class UUIDManager : MonoBehaviour
 		Debug.Log (_uuid);
 
 		string url = "http://localhost:8000/user/add";
-		WWWForm wwwForm = new WWWForm ();
+		WWWForm form = new WWWForm ();
 
-		wwwForm.AddField ("uuid", _uuid);
-		wwwForm.AddField ("name", nameField.text);
-		wwwForm.AddField ("roll_count", "3");
+		form.AddField ("uuid", _uuid);
+		form.AddField ("name", nameField.text);
+		form.AddField ("roll_count", "3");
 
-		WWW www = new WWW(url, wwwForm);
-		Debug.Log (www);
+		WWW www = new WWW(url, form);
 
 		yield return www;
+
+		Debug.Log (www);
+
+		if (www.error != null) {
+			Debug.Log("Error");
+		} else {
+			Debug.Log("Success");
+		}
+
+
 	}
 
 

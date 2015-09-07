@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+using MiniJSON;
 
 public class GameSystem : MonoBehaviour {
+
+	private string _uuid;
 
 	// Use this for initialization
 	void Start () {
@@ -16,19 +21,45 @@ public class GameSystem : MonoBehaviour {
 
 	public void GameStart()
 	{
-		
-		StartCoroutine (CheckUser());
-	}
 
-	public IEnumerator CheckUser()
-	{
 		if (PlayerPrefs.HasKey ("uuid")) {
-			Debug.Log ("持ってる");
-			yield return null;
+			StartCoroutine (AuthUser ());
 		} else {
 			Debug.Log ("持って無い");
-			yield return null;
 			Application.LoadLevel ("Signup");
 		}
+	}
+
+	public IEnumerator AuthUser()
+	{
+		_uuid = PlayerPrefs.GetString ("uuid");
+		Debug.Log (_uuid);
+
+		string url = "http://localhost:8000/user/auth";
+		WWWForm form = new WWWForm ();
+
+		form.AddField ("uuid", _uuid);
+
+		Debug.Log ("持ってる");
+
+		WWW www = new WWW(url, form);
+
+		yield return www;
+
+
+		Debug.Log (www);
+
+		if (www.error != null) {
+			Debug.Log("Error");
+		} else {
+			Debug.Log("Success");
+			var jsonData = MiniJSON.Json.Deserialize (www.text);
+			Debug.Log(www.text);
+			Debug.Log(jsonData);
+
+
+
+		}
+
 	}
 }
