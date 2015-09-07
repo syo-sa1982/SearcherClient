@@ -53,10 +53,13 @@ public class GameSystem : MonoBehaviour {
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			var jsonData = MiniJSON.Json.Deserialize (www.text);
+			var jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 			Debug.Log(www.text);
-			Debug.Log(jsonData);
+			Debug.Log((string)jsonData["UUID"]);
 
+			if((string)jsonData["UUID"] == _uuid){
+				Debug.Log ("登録ユーザーです");
+			}
 
 
 		}
