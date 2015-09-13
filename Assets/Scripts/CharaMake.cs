@@ -23,13 +23,13 @@ public class CharaMake : MonoBehaviour {
 	[SerializeField]
 	private int Education;
 
-	private Dictionary<string, int[]> RollData = new Dictionary<string, int[]> ();
+	private Dictionary<string, string> RollData = new Dictionary<string, string> ();
 
 	void Awake () 
 	{
-		int [] roll3D6 = new int[]{ 6, 3 };// 3D6
-		int [] roll2D6Plus6 = new int[]{ 6, 2, 6 };// 2D6+6
-		int [] roll3D6Plus3 = new int[]{ 6, 3, 3 };// 3D6+3
+		string roll3D6 = "{ 6, 3 }";// 3D6
+		string roll2D6Plus6 = "{ 6, 2, 6 }";// 2D6+6
+		string roll3D6Plus3 = "{ 6, 3, 3 }";// 3D6+3
 
 		RollData.Add ("Strength" , roll3D6);
 		RollData.Add ("Constitution", roll3D6);
@@ -68,7 +68,7 @@ public class CharaMake : MonoBehaviour {
 		string url = "http://localhost:8000/player/base_make";
 		WWWForm form = new WWWForm ();
 
-		foreach (KeyValuePair<string,int[]> data in RollData) {
+		foreach (KeyValuePair<string,string> data in RollData) {
 			form.AddField (data.Key, data.Value);
 		}
 
