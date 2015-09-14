@@ -27,9 +27,9 @@ public class CharaMake : MonoBehaviour {
 
 	void Awake () 
 	{
-		string roll3D6 = "6, 3";// 3D6
-		string roll2D6Plus6 = "6, 2, 6";// 2D6+6
-		string roll3D6Plus3 = "6, 3, 3";// 3D6+3
+		string roll3D6 = "6,3";// 3D6
+		string roll2D6Plus6 = "6,2,6";// 2D6+6
+		string roll3D6Plus3 = "6,3,3";// 3D6+3
 
 		RollData.Add ("Strength" , roll3D6);
 		RollData.Add ("Constitution", roll3D6);
