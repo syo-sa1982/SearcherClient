@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -7,9 +8,9 @@ using MiniJSON;
 public class CharaMake : MonoBehaviour {
 
 	[SerializeField]
-	private int Strength;
+	private InputField Strength;
 	[SerializeField]
-	private int Constitution;
+	private InputField Constitution;
 	[SerializeField]
 	private int Power;
 	[SerializeField]
@@ -22,6 +23,9 @@ public class CharaMake : MonoBehaviour {
 	private int Intelligence;
 	[SerializeField]
 	private int Education;
+
+
+
 
 	private Dictionary<string, string> RollData = new Dictionary<string, string> ();
 
@@ -41,6 +45,9 @@ public class CharaMake : MonoBehaviour {
 		RollData.Add ("Intelligence", roll2D6Plus6);
 
 		RollData.Add ("Education", roll3D6Plus3);
+
+
+		Strength.text = 10.ToString();
 
 	}
 
@@ -82,9 +89,13 @@ public class CharaMake : MonoBehaviour {
 		} else {
 			Debug.Log ("success");
 
-			var jsonData = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-			Debug.Log(www.text);
-			
+			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			Debug.Log(charaAPI);
+			Debug.Log(charaAPI["Strength"]);
+
+			Strength.text = charaAPI["Strength"].ToString();
+
+
 		}
 
 
