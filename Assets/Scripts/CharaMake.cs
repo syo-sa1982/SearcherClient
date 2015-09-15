@@ -12,18 +12,17 @@ public class CharaMake : MonoBehaviour {
 	[SerializeField]
 	private InputField Constitution;
 	[SerializeField]
-	private int Power;
+	private InputField Power;
 	[SerializeField]
-	private int Dextality;
+	private InputField Dextality;
 	[SerializeField]
-	private int Appeal;
+	private InputField Appeal;
 	[SerializeField]
-	private int Size;
+	private InputField Size;
 	[SerializeField]
-	private int Intelligence;
+	private InputField Intelligence;
 	[SerializeField]
-	private int Education;
-
+	private InputField Education;
 
 
 
@@ -45,9 +44,6 @@ public class CharaMake : MonoBehaviour {
 		RollData.Add ("Intelligence", roll2D6Plus6);
 
 		RollData.Add ("Education", roll3D6Plus3);
-
-
-		Strength.text = 10.ToString();
 
 	}
 
