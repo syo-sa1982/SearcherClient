@@ -99,16 +99,8 @@ public class CharaMake : MonoBehaviour {
 			Debug.Log ("success");
 
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-			Debug.Log(charaAPI);
-			Debug.Log(charaAPI["Strength"]);
-
-
 			foreach(KeyValuePair<string, object> data in charaAPI) {
-				
-				Debug.Log(data.Key);
-				Debug.Log(data.Value);
-				Debug.Log(data.Value.ToString());
-//				BaseStatus[data.Key].text = data.Value.ToString();
+				BaseStatus [data.Key].text = data.Value.ToString ();
 			}
 		}
 	}
