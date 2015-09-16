@@ -59,6 +59,7 @@ public class GameSystem : MonoBehaviour {
 
 			if((string)jsonData["UUID"] == _uuid){
 				Debug.Log ("登録ユーザーです");
+				Application.LoadLevel ("CharaMake");
 			}
 
 
