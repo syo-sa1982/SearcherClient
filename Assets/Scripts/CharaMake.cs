@@ -8,21 +8,7 @@ using MiniJSON;
 public class CharaMake : MonoBehaviour {
 
 	[SerializeField]
-	private InputField Strength;
-	[SerializeField]
-	private InputField Constitution;
-	[SerializeField]
-	private InputField Power;
-	[SerializeField]
-	private InputField Dextality;
-	[SerializeField]
-	private InputField Appeal;
-	[SerializeField]
-	private InputField Size;
-	[SerializeField]
-	private InputField Intelligence;
-	[SerializeField]
-	private InputField Education;
+	private InputField Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
 
 	private Dictionary<string, string> RollData;
 	private Dictionary<string, InputField> BaseStatus;
