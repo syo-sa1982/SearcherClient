@@ -10,8 +10,12 @@ public class CharaMake : MonoBehaviour {
 	[SerializeField]
 	private InputField Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
 
+	[SerializeField]
+	private Text hp;
+
 	private Dictionary<string, string> RollData;
 	private Dictionary<string, InputField> BaseStatus;
+	private Dictionary<string, Text> CharaStatus;
 
 	void Awake () 
 	{
@@ -42,6 +46,12 @@ public class CharaMake : MonoBehaviour {
 			{"Intelligence", Intelligence},
 			{"Education", Education}
 		};
+
+		CharaStatus = new Dictionary<string, Text> () 
+		{
+			{"hp", hp}
+		};
+
 
 
 	}
@@ -87,7 +97,11 @@ public class CharaMake : MonoBehaviour {
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 			foreach(KeyValuePair<string, object> data in charaAPI) {
 				BaseStatus [data.Key].text = data.Value.ToString ();
+				Debug.Log (data.Key + ":" + data.Value.ToString ());
 			}
+			CharaStatus["hp"].text = ((int.Parse(BaseStatus["Constitution"].text) + int.Parse(BaseStatus["Size"].text)) / 2).ToString();
+
+			Debug.Log (CharaStatus["hp"].text);
 		}
 	}
 }
