@@ -11,7 +11,7 @@ public class CharaMake : MonoBehaviour {
 	private InputField Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
 
 	[SerializeField]
-	private Text hp;
+	private Text Hp,Mp,Sanity,Luck,Knowledge,Idea,JopSkillPoint,HobbySkillPoint,DamageBonus;
 
 	private Dictionary<string, string> RollData;
 	private Dictionary<string, InputField> BaseStatus;
@@ -49,7 +49,15 @@ public class CharaMake : MonoBehaviour {
 
 		CharaStatus = new Dictionary<string, Text> () 
 		{
-			{"hp", hp}
+			{"HP", Hp},
+			{"MP",Mp},
+			{"Sanity",Sanity},
+			{"Luck",Luck},
+			{"Knowledge",Knowledge},
+			{"Idea",Idea},
+			{"JopSkillPoint",JopSkillPoint},
+			{"HobbySkillPoint",HobbySkillPoint},
+			{"DamageBonus",DamageBonus}
 		};
 
 
@@ -96,23 +104,18 @@ public class CharaMake : MonoBehaviour {
 
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 
-			Debug.Log (charaAPI);
+			var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
+			var CharaStatusAPI = charaAPI ["CharaStatus"] as Dictionary<string,object>;
 
-			foreach(KeyValuePair<string, object> data in charaAPI) {
-				// BaseStatus [data.Key].text = data.Value.ToString ();
-				Debug.Log (data.Key + ":" + data.Value.ToString ());
-				foreach(KeyValuePair<string, object> values in data.Value as Dictionary<string,object> ) {
-					Debug.Log (values.Key + ":" + values.Value.ToString ());
+			Debug.Log (BaseStatusAPI);
+			Debug.Log (CharaStatusAPI);
 
-				}
+			foreach(KeyValuePair<string, object> data in BaseStatusAPI) {
+				BaseStatus[data.Key].text = data.Value.ToString ();
 			}
-//			foreach(KeyValuePair<string, object> data in charaAPI) {
-//				BaseStatus [data.Key].text = data.Value.ToString ();
-//				Debug.Log (data.Key + ":" + data.Value.ToString ());
-//			}
-//			CharaStatus["hp"].text = ((int.Parse(BaseStatus["Constitution"].text) + int.Parse(BaseStatus["Size"].text)) / 2).ToString();
-//
-//			Debug.Log (CharaStatus["hp"].text);
+			foreach(KeyValuePair<string, object> data in CharaStatusAPI) {
+				CharaStatus[data.Key].text = data.Value.ToString ();
+			}
 		}
 	}
 }
