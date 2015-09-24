@@ -40,8 +40,6 @@ public class GameSystem : MonoBehaviour {
 
 		form.AddField ("uuid", _uuid);
 
-		Debug.Log ("持ってる");
-
 		WWW www = new WWW(url, form);
 
 		yield return www;
@@ -57,9 +55,11 @@ public class GameSystem : MonoBehaviour {
 			Debug.Log(www.text);
 			Debug.Log((string)jsonData["UUID"]);
 
-			if((string)jsonData["UUID"] == _uuid){
+			if ((string)jsonData ["UUID"] == _uuid) {
 				Debug.Log ("登録ユーザーです");
 				Application.LoadLevel ("CharaMake");
+			} else {
+				Debug.Log ("登録ユーザーではない");
 			}
 
 
