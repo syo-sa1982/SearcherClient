@@ -85,7 +85,7 @@ public class CharaMake : MonoBehaviour {
 
 	public IEnumerator GetDiceRollResult()
 	{
-		string url = "http://localhost:8000/player/base_make";
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
 		WWWForm form = new WWWForm ();
 
 		foreach (KeyValuePair<string,string> data in RollData) {
