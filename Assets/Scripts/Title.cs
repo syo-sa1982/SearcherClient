@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using MiniJSON;
 
-public class GameSystem : MonoBehaviour {
+public class Title : MonoBehaviour {
 
 	private string _uuid;
 
@@ -35,7 +35,9 @@ public class GameSystem : MonoBehaviour {
 		_uuid = PlayerPrefs.GetString ("uuid");
 		Debug.Log (_uuid);
 
-		string url = "http://localhost:8000/user/auth";
+
+
+		string url = ConfURL.URL_DEBUG + ConfURL.USER_AUTH;
 		WWWForm form = new WWWForm ();
 
 		form.AddField ("uuid", _uuid);
