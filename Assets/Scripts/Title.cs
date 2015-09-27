@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 using MiniJSON;
 
-public class GameSystem : MonoBehaviour {
+public class Title : MonoBehaviour {
 
 	private string _uuid;
 
