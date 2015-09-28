@@ -113,13 +113,25 @@ public class CharaMake : MonoBehaviour
 
 	public void StatusSubmit()
 	{
-		StartCoroutine (SendPlayerStatus);
+		StartCoroutine (SendPlayerStatus());
 	}
 
 	public IEnumerator SendPlayerStatus()
 	{
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
+
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+
+		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
+			form.AddField (data.Key, data.Value.text.ToString());
+		}
 		WWW www = new WWW(url, form);
 
 		yield return www;
