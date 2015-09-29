@@ -5,7 +5,8 @@ using System.Collections.Generic;
 
 using MiniJSON;
 
-public class CharaMake : MonoBehaviour {
+public class CharaMake : MonoBehaviour 
+{
 
 	[SerializeField]
 	private InputField Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
@@ -64,24 +65,13 @@ public class CharaMake : MonoBehaviour {
 
 	}
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
-	public void ParamGenerate ()
+	public void ParamGenerate()
 	{
 		Debug.Log ("押した");
 
 		StartCoroutine (GetDiceRollResult());
 
 	}
-
 
 	public IEnumerator GetDiceRollResult()
 	{
@@ -117,5 +107,34 @@ public class CharaMake : MonoBehaviour {
 				CharaStatus[data.Key].text = data.Value.ToString ();
 			}
 		}
+	}
+
+
+
+	public void StatusSubmit()
+	{
+		StartCoroutine (SendPlayerStatus());
+	}
+
+	public IEnumerator SendPlayerStatus()
+	{
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
+
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
+		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+
+		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
+			form.AddField (data.Key, data.Value.text.ToString());
+		}
+		WWW www = new WWW(url, form);
+
+		yield return www;
+
 	}
 }
