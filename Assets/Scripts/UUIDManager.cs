@@ -9,6 +9,8 @@ public class UUIDManager : MonoBehaviour
 	[SerializeField]
 	private InputField nameField;
 
+//	public GameObject canvasObject;
+
 	void Awake()
 	{
 		Debug.Log ("awake");
@@ -16,16 +18,20 @@ public class UUIDManager : MonoBehaviour
 
 	}
 
-	// Use this for initialization
-	void Start () 
+	public void NameSubmit()
 	{
-	
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
+		Debug.Log ("名乗った");
+		System.Guid guid = System.Guid.NewGuid();
+		_uuid = guid.ToString();
+
+		Debug.Log (_uuid);
+		Debug.Log (nameField);
+
+
+		PlayerPrefs.SetString("uuid",_uuid);
+		PlayerPrefs.Save();
+
+		StartCoroutine(AddNewUser());
 	}
 
 	public void Save()
@@ -60,6 +66,8 @@ public class UUIDManager : MonoBehaviour
 
 		WWW www = new WWW(url, form);
 
+//		GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/Loading"));
+//		nameAddWindow.transform.SetParent (canvasObject.transform,false);
 		yield return www;
 
 		Debug.Log (www);
