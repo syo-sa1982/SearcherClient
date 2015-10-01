@@ -136,5 +136,11 @@ public class CharaMake : MonoBehaviour
 
 		yield return www;
 
+		if (www.error != null) {
+			Debug.Log("Error");
+		} else {
+			Debug.Log("Success");
+		}
+
 	}
 }

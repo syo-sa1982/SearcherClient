@@ -8,6 +8,8 @@ public class Title : MonoBehaviour {
 
 	private string _uuid;
 
+	public GameObject canvasObject;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -26,7 +28,9 @@ public class Title : MonoBehaviour {
 			StartCoroutine (AuthUser ());
 		} else {
 			Debug.Log ("持って無い");
-			Application.LoadLevel ("Signup");
+			GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/NameAdd"));
+			nameAddWindow.transform.SetParent (canvasObject.transform,false);
+//			Application.LoadLevel ("Signup");
 		}
 	}
 
@@ -43,7 +47,7 @@ public class Title : MonoBehaviour {
 		form.AddField ("uuid", _uuid);
 
 		WWW www = new WWW(url, form);
-
+		Instantiate (Resources.Load ("Prefabs/Loading"));
 		yield return www;
 
 
