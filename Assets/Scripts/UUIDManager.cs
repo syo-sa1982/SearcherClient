@@ -9,12 +9,14 @@ public class UUIDManager : MonoBehaviour
 	[SerializeField]
 	private InputField nameField;
 
-//	public GameObject canvasObject;
+	GameObject canvasObject;
 
 	void Awake()
 	{
+
+		canvasObject = GameObject.Find("Canvas");
 		Debug.Log ("awake");
-		Debug.Log (_uuid);
+		Debug.Log (canvasObject);
 
 	}
 
@@ -66,8 +68,8 @@ public class UUIDManager : MonoBehaviour
 
 		WWW www = new WWW(url, form);
 
-//		GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/Loading"));
-//		nameAddWindow.transform.SetParent (canvasObject.transform,false);
+		GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/Loading"));
+		nameAddWindow.transform.SetParent (canvasObject.transform,false);
 		yield return www;
 
 		Debug.Log (www);
