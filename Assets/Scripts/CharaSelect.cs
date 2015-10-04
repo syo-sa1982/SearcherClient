@@ -1,11 +1,17 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
+
+using MiniJSON;
 
 public class CharaSelect : MonoBehaviour {
+
+	private string _uuid;
 
 	// Use this for initialization
 	void Start () 
 	{
+		_uuid = PlayerPrefs.GetString ("uuid");
 		StartCoroutine (GetCharaList ());
 	}
 	
@@ -18,13 +24,22 @@ public class CharaSelect : MonoBehaviour {
 	{
 		Debug.Log ("GetCharaList");
 
-		string url = ConfURL.URL_DEBUG+ConfURL.USER_ADD;
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_LIST;
 		WWWForm form = new WWWForm ();
 
-		form.AddField ("roll_count", "3");
+		form.AddField ("UUID", _uuid);
 
 		WWW www = new WWW(url, form);
 		yield return www;
 
+		Debug.Log (www);
+
+		if (www.error != null) {
+			Debug.Log("Error");
+		} else {
+			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			Debug.Log("Success");
+
+		}
 	}
 }
