@@ -63,7 +63,7 @@ public class Title : MonoBehaviour {
 
 			if ((string)jsonData ["UUID"] == _uuid) {
 				Debug.Log ("登録ユーザーです");
-				Application.LoadLevel ("CharaMake");
+				Application.LoadLevel ("CharaSelect");
 			} else {
 				Debug.Log ("登録ユーザーではない");
 			}
