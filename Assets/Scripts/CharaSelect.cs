@@ -37,8 +37,14 @@ public class CharaSelect : MonoBehaviour {
 		if (www.error != null) {
 			Debug.Log("Error");
 		} else {
-			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 			Debug.Log("Success");
+			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+
+
+			foreach(KeyValuePair<string, object> data in charaAPI) {
+				Debug.Log(data.Key);
+				Debug.Log(data.Value);
+			}
 
 		}
 	}
