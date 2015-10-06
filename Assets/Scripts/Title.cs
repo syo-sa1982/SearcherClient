@@ -30,7 +30,8 @@ public class Title : MonoBehaviour {
 			Debug.Log ("持って無い");
 			GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/NameAdd"));
 			nameAddWindow.transform.SetParent (canvasObject.transform,false);
-//			Application.LoadLevel ("Signup");
+			//  Application.LoadLevel ("Signup");
+			
 		}
 	}
 
