@@ -40,17 +40,18 @@ public class Title : MonoBehaviour {
 		_uuid = PlayerPrefs.GetString ("uuid");
 		Debug.Log (_uuid);
 
-
-
 		string url = ConfURL.URL_DEBUG + ConfURL.USER_AUTH;
-		WWWForm form = new WWWForm ();
+		WWWForm form = new WWWForm();
 
 		form.AddField ("uuid", _uuid);
 
 		WWW www = new WWW(url, form);
-		Instantiate (Resources.Load ("Prefabs/Loading"));
-		yield return www;
 
+		GameObject loading = (GameObject)Instantiate (Resources.Load("Prefabs/Loading"));
+		loading.transform.SetParent(canvasObject.transform,false);
+
+		yield return www;
+		Destroy (loading);
 
 		Debug.Log (www);
 
@@ -68,8 +69,6 @@ public class Title : MonoBehaviour {
 			} else {
 				Debug.Log ("登録ユーザーではない");
 			}
-
-
 		}
 
 	}
