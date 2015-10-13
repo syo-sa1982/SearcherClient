@@ -68,9 +68,11 @@ public class UUIDManager : MonoBehaviour
 
 		WWW www = new WWW(url, form);
 
-		GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/Loading"));
-		nameAddWindow.transform.SetParent (canvasObject.transform,false);
+		GameObject loading = (GameObject)Instantiate (Resources.Load ("Prefabs/Loading"));
+		loading.transform.SetParent (canvasObject.transform,false);
+
 		yield return www;
+		Destroy (loading);
 
 		Debug.Log (www);
 

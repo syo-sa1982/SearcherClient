@@ -41,13 +41,15 @@ public class Title : MonoBehaviour {
 		Debug.Log (_uuid);
 
 		string url = ConfURL.URL_DEBUG + ConfURL.USER_AUTH;
-		WWWForm form = new WWWForm ();
+		WWWForm form = new WWWForm();
 
 		form.AddField ("uuid", _uuid);
 
 		WWW www = new WWW(url, form);
-		GameObject loading = Resources.Load ("Prefabs/Loading") as GameObject;
-		Instantiate (loading);
+
+		GameObject loading = (GameObject)Instantiate (Resources.Load("Prefabs/Loading"));
+		loading.transform.SetParent(canvasObject.transform,false);
+
 		yield return www;
 		Destroy (loading);
 
