@@ -13,5 +13,6 @@ public static class ConfURL
 	public const string PLAYER_BASE_MAKE = "player/base_make";
 	public const string PLAYER_GENERATE = "player/generate";
 	public const string PLAYER_LIST = "player/list";
+	public const string PLAYER_SKILL_SETTING = "player/skill_setting";
 
 }
