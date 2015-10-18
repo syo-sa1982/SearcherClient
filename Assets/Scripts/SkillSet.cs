@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class SkillSet : MonoBehaviour
 {
 
+	public GameObject canvasObject;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -36,7 +38,9 @@ public class SkillSet : MonoBehaviour
 			Debug.Log(skillMasterList);
 
 			foreach(var data in skillMasterList) {
-				Debug.Log(data);
+
+				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
+				skillField.transform.SetParent(canvasObject.transform,false);
 			}
 		}
 	}
