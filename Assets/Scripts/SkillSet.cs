@@ -30,11 +30,13 @@ public class SkillSet : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			var skillMasterList = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 
-			foreach(KeyValuePair<string, object> data in skillMasterList) {
-				Debug.Log(data.Key);
-				Debug.Log(data.Value);
+			Debug.Log(www.text);
+			var skillMasterList = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			Debug.Log(skillMasterList);
+
+			foreach(var data in skillMasterList) {
+				Debug.Log(data);
 			}
 		}
 	}
