@@ -22,9 +22,18 @@ public class SkillSet : MonoBehaviour
 
 	public IEnumerator showSkillMasterList()
 	{
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SETTING;
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
 
-		WWW www = new WWW(url);
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SETTING;
+		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+
+		WWW www = new WWW(url, form);
 
 		yield return www;
 
@@ -34,11 +43,19 @@ public class SkillSet : MonoBehaviour
 			Debug.Log("Success");
 
 			Debug.Log(www.text);
-			var skillMasterList = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-			Debug.Log(skillMasterList);
+			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			Debug.Log(skillSetAPI);
 
-			foreach(var data in skillMasterList) {
-
+			var skillList = skillSetAPI ["SkillMaster"] as Dictionary<string,object>;
+			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
+			foreach(var data in skillList) {
+				var SkillData = data.Value as Dictionary<string,object>;
+				Debug.Log(data.Key);
+				Debug.Log (SkillData ["SkillName"]);
+				foreach(var dataValue in SkillData) {
+					Debug.Log(dataValue.Key);
+					Debug.Log(dataValue.Value);
+				}
 				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
 				skillField.transform.SetParent(canvasObject.transform,false);
 			}
