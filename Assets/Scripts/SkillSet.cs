@@ -51,7 +51,7 @@ public class SkillSet : MonoBehaviour
 			foreach(var data in skillList) {
 				var SkillData = data.Value as Dictionary<string,object>;
 				Debug.Log(data.Key);
-				Debug.Log (SkillData ["SkillName"]);
+				Debug.Log (SkillData ["ID"]);
 				foreach(var dataValue in SkillData) {
 					Debug.Log(dataValue.Key);
 					Debug.Log(dataValue.Value);
