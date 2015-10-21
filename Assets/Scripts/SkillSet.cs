@@ -51,21 +51,12 @@ public class SkillSet : MonoBehaviour
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 			foreach(var data in skillList) {
 				var SkillData = data.Value as Dictionary<string,object>;
-//				Debug.Log ((int)SkillData ["Value"]);
-//				foreach(var dataValue in SkillData) {
-//					Debug.Log(dataValue.Key);
-//					Debug.Log(dataValue.Value);
-//				}
 				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
 				skillField.transform.SetParent(canvasObject.transform,false);
 
-				GameObject skillName = skillField.transform.FindChild ("SkillName").gameObject;
-				GameObject skillValue = skillField.transform.FindChild ("SkillValue").gameObject;
-				var nameText = skillName.GetComponent<Text>();
-				var valueText = skillValue.gameObject.GetComponent<InputField>();
-				nameText.text = (string)SkillData ["SkillName"];
-				int SkillDataValue = System.Convert.ToInt32(SkillData ["Value"]);
-				valueText.text = SkillDataValue.ToString();
+				SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
+				fieldController.setSkillData (SkillData);
+
 			}
 		}
 	}
