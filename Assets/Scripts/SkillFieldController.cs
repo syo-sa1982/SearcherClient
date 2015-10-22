@@ -8,6 +8,7 @@ public class SkillFieldController : MonoBehaviour
 
 	private Dictionary<string,object> SkillData;
 	private int DefaultValue;
+	private int CurrentValue;
 
 	[SerializeField]
 	private Text SkillName;
@@ -20,7 +21,22 @@ public class SkillFieldController : MonoBehaviour
 		this.SkillData = paramSkillData;
 		SkillName.text = (string)SkillData ["SkillName"];
 		this.DefaultValue = System.Convert.ToInt32(SkillData ["Value"]);
+		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
+	}
+
+	public void CountUp()
+	{
+		CurrentValue++;
+		SkillData ["Value"] = (object)CurrentValue;
+		SkillValue.text = CurrentValue.ToString ();
+	}
+
+	public void CountDown()
+	{
+		CurrentValue--;
+		SkillData ["Value"] = (object)CurrentValue;
+		SkillValue.text = CurrentValue.ToString ();
 	}
 
 	// Use this for initialization
