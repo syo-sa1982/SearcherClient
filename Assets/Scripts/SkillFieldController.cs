@@ -30,7 +30,7 @@ public class SkillFieldController : MonoBehaviour
 	public void CountUp()
 	{
 		CurrentValue++;
-		if (!isPossible()){CurrentValue--; return;}
+		if (isImpossible()){CurrentValue--; return;}
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -38,14 +38,14 @@ public class SkillFieldController : MonoBehaviour
 	public void CountDown()
 	{
 		CurrentValue--;
-		if (!isPossible()){CurrentValue++; return;}
+		if (isImpossible()){CurrentValue++; return;}
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
-	bool isPossible()
+	bool isImpossible()
 	{
-		return (CurrentValue >= MAX_VALUE || CurrentValue <= DefaultValue) ? false : true;
+		return (CurrentValue >= MAX_VALUE || CurrentValue <= DefaultValue) ? true : false;
 	}
 
 	// Use this for initialization
