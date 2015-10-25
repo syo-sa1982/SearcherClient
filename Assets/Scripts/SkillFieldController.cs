@@ -10,6 +10,8 @@ public class SkillFieldController : MonoBehaviour
 	private int DefaultValue;
 	private int CurrentValue;
 
+	const int MAX_VALUE = 99;
+
 	[SerializeField]
 	private Text SkillName;
 
@@ -28,6 +30,7 @@ public class SkillFieldController : MonoBehaviour
 	public void CountUp()
 	{
 		CurrentValue++;
+		if (isImpossible()){CurrentValue--; return;}
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -35,8 +38,14 @@ public class SkillFieldController : MonoBehaviour
 	public void CountDown()
 	{
 		CurrentValue--;
+		if (isImpossible()){CurrentValue++; return;}
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
+	}
+
+	bool isImpossible()
+	{
+		return (CurrentValue >= MAX_VALUE || CurrentValue <= DefaultValue) ? true : false;
 	}
 
 	// Use this for initialization

@@ -8,6 +8,12 @@ public class SkillSet : MonoBehaviour
 
 	public GameObject canvasObject;
 
+	[SerializeField]
+	private int JobSkillPoint, HobbySkillPoint;
+
+	[SerializeField]
+	private Text SkillPoints;
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -49,6 +55,9 @@ public class SkillSet : MonoBehaviour
 
 			var skillList = skillSetAPI ["SkillMaster"] as Dictionary<string,object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
+			JobSkillPoint = System.Convert.ToInt32(playerStatus["JopSkillPoint"]);
+			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
+			SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
 			foreach(var data in skillList) {
 				var SkillData = data.Value as Dictionary<string,object>;
 				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
