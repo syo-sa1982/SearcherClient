@@ -9,6 +9,7 @@ public class SkillFieldController : MonoBehaviour
 	private Dictionary<string,object> SkillData;
 	private int DefaultValue;
 	private int CurrentValue;
+	private SkillSet skillset;
 
 	const int MAX_VALUE = 99;
 
@@ -17,6 +18,15 @@ public class SkillFieldController : MonoBehaviour
 
 	[SerializeField]
 	private InputField SkillValue;
+
+	void Awake()
+	{
+		skillset = GameObject.Find("Canvas").GetComponent<SkillSet> ();
+
+		Debug.Log (skillset.HobbySkillPoint);
+		Debug.Log (skillset.JobSkillPoint);
+		Debug.Log ("awake");
+	}
 
 	public void setSkillData(Dictionary<string,object> paramSkillData)
 	{
@@ -30,7 +40,8 @@ public class SkillFieldController : MonoBehaviour
 	public void CountUp()
 	{
 		CurrentValue++;
-		if (isImpossible()){CurrentValue--; return;}
+		if (isOutofRange() || isPointLost()){CurrentValue--; return;}
+		skillset.JobSkillPoint--;
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -38,23 +49,22 @@ public class SkillFieldController : MonoBehaviour
 	public void CountDown()
 	{
 		CurrentValue--;
-		if (isImpossible()){CurrentValue++; return;}
+		if (isOutofRange()){CurrentValue++; return;}
+
+		skillset.JobSkillPoint++;
+
 		SkillData ["Value"] = (object)CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
-	bool isImpossible()
+	bool isOutofRange()
 	{
-		return (CurrentValue >= MAX_VALUE || CurrentValue <= DefaultValue) ? true : false;
+		return (CurrentValue > MAX_VALUE || CurrentValue < DefaultValue) ? true : false;
 	}
 
-	// Use this for initialization
-	void Start () {
-	
+	bool isPointLost()
+	{
+		return (skillset.JobSkillPoint < 1) ? true : false;
 	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+
 }
