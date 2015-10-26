@@ -8,8 +8,10 @@ public class SkillSet : MonoBehaviour
 
 	public GameObject canvasObject;
 
+	const int HIDE_CATEGORY = 13;
+
 	[SerializeField]
-	private int JobSkillPoint, HobbySkillPoint;
+	public int JobSkillPoint, HobbySkillPoint;
 
 	[SerializeField]
 	private Text SkillPoints;
@@ -17,14 +19,13 @@ public class SkillSet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-
 		StartCoroutine (showSkillMasterList());
 	}
 	
 	// Update is called once per frame
 	void Update ()
 	{
-	
+		SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
 	}
 
 	public IEnumerator showSkillMasterList()
@@ -55,16 +56,20 @@ public class SkillSet : MonoBehaviour
 
 			var skillList = skillSetAPI ["SkillMaster"] as Dictionary<string,object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
+
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JopSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
 			SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
+
 			foreach(var data in skillList) {
 				var SkillData = data.Value as Dictionary<string,object>;
-				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
-				skillField.transform.SetParent(canvasObject.transform,false);
+				if (System.Convert.ToInt32(SkillData["ID"]) != HIDE_CATEGORY) {
+					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
+					skillField.transform.SetParent(canvasObject.transform,false);
 
-				SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
-				fieldController.setSkillData (SkillData);
+					SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
+					fieldController.setSkillData (SkillData);
+				} 
 
 			}
 		}
