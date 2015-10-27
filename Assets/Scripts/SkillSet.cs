@@ -57,7 +57,7 @@ public class SkillSet : MonoBehaviour
 			var skillList = skillSetAPI ["SkillMaster"] as Dictionary<string,object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 
-			JobSkillPoint = System.Convert.ToInt32(playerStatus["JopSkillPoint"]);
+			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
 			SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
 
