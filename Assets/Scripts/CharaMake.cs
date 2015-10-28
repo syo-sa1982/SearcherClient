@@ -12,7 +12,7 @@ public class CharaMake : MonoBehaviour
 	private InputField Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
 
 	[SerializeField]
-	private Text Hp,Mp,Sanity,Luck,Knowledge,Idea,JopSkillPoint,HobbySkillPoint,DamageBonus;
+	private Text Hp,Mp,Sanity,Luck,Knowledge,Idea,JobSkillPoint,HobbySkillPoint,DamageBonus;
 
 	private Dictionary<string, string> RollData;
 	private Dictionary<string, InputField> BaseStatus;
@@ -56,7 +56,7 @@ public class CharaMake : MonoBehaviour
 			{"Luck",Luck},
 			{"Knowledge",Knowledge},
 			{"Idea",Idea},
-			{"JopSkillPoint",JopSkillPoint},
+			{"JobSkillPoint",JobSkillPoint},
 			{"HobbySkillPoint",HobbySkillPoint},
 			{"DamageBonus",DamageBonus}
 		};
@@ -91,6 +91,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log ("error");
 		} else {
 			Debug.Log ("success");
+			Debug.Log (www.text);
 
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 
@@ -104,6 +105,10 @@ public class CharaMake : MonoBehaviour
 				BaseStatus[data.Key].text = data.Value.ToString ();
 			}
 			foreach(KeyValuePair<string, object> data in CharaStatusAPI) {
+
+				Debug.Log (data.Key);
+				Debug.Log (data.Value);
+
 				CharaStatus[data.Key].text = data.Value.ToString ();
 			}
 		}
@@ -140,6 +145,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
+			Application.LoadLevel ("SkillSet");
 		}
 
 	}
