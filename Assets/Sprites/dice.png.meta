@@ -1,15 +1,15 @@
 fileFormatVersion: 2
-guid: f131a96141f2744eda9d3a9e2ad4b9f5
-timeCreated: 1442361005
+guid: 2ccbb4e6c78df4f2a89bcc565ac8da77
+timeCreated: 1446158569
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: nc74622_0
-    21300002: nc74622_1
-    21300004: nc74622_2
-    21300006: nc74622_3
-    21300008: nc74622_4
-    21300010: nc74622_5
+    21300000: dice_0
+    21300002: dice_1
+    21300004: dice_2
+    21300006: dice_3
+    21300008: dice_4
+    21300010: dice_5
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
@@ -56,63 +56,63 @@ TextureImporter:
   buildTargetSettings: []
   spriteSheet:
     sprites:
-    - name: nc74622_0
+    - name: dice_0
       rect:
         serializedVersion: 2
-        x: 49
-        y: 527
-        width: 362
-        height: 370
+        x: 18
+        y: 233
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dice_1
+      rect:
+        serializedVersion: 2
+        x: 238
+        y: 233
+        width: 204
+        height: 204
+      alignment: 0
+      pivot: {x: .5, y: .5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+    - name: dice_2
+      rect:
+        serializedVersion: 2
+        x: 458
+        y: 233
+        width: 204
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: nc74622_1
+    - name: dice_3
       rect:
         serializedVersion: 2
-        x: 459
-        y: 527
-        width: 362
-        height: 370
+        x: 18
+        y: 13
+        width: 204
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: nc74622_2
+    - name: dice_4
       rect:
         serializedVersion: 2
-        x: 871
-        y: 527
-        width: 362
-        height: 370
+        x: 238
+        y: 13
+        width: 204
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: nc74622_3
+    - name: dice_5
       rect:
         serializedVersion: 2
-        x: 49
-        y: 59
-        width: 362
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: nc74622_4
-      rect:
-        serializedVersion: 2
-        x: 459
-        y: 59
-        width: 362
-        height: 370
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-    - name: nc74622_5
-      rect:
-        serializedVersion: 2
-        x: 871
-        y: 59
-        width: 362
-        height: 370
+        x: 458
+        y: 13
+        width: 204
+        height: 204
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
