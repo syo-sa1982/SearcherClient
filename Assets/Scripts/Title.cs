@@ -57,7 +57,7 @@ public class Title : MonoBehaviour {
 			if ((string)jsonData ["UUID"] == _uuid) {
 				Debug.Log ("登録ユーザーです");
 				audioSource.Play ();
-
+				yield return new WaitForSeconds (audioSource.clip.length);
 				Application.LoadLevel ("CharaSelect");
 			} else {
 				Debug.Log ("登録ユーザーではない");
