@@ -8,18 +8,11 @@ public class Title : MonoBehaviour {
 
 	private string _uuid;
 
+	[SerializeField]
+//	private AudioClip TitleSE;
+	private AudioSource audioSource;
+
 	public GameObject canvasObject;
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 
 	public void GameStart()
 	{
@@ -30,8 +23,6 @@ public class Title : MonoBehaviour {
 			Debug.Log ("持って無い");
 			GameObject nameAddWindow = (GameObject)Instantiate (Resources.Load ("Prefabs/NameAdd"));
 			nameAddWindow.transform.SetParent (canvasObject.transform,false);
-			//  Application.LoadLevel ("Signup");
-			
 		}
 	}
 
@@ -65,6 +56,8 @@ public class Title : MonoBehaviour {
 
 			if ((string)jsonData ["UUID"] == _uuid) {
 				Debug.Log ("登録ユーザーです");
+				audioSource.Play ();
+				yield return new WaitForSeconds (audioSource.clip.length);
 				Application.LoadLevel ("CharaSelect");
 			} else {
 				Debug.Log ("登録ユーザーではない");
