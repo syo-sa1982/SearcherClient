@@ -14,7 +14,7 @@ public class SkillSet : MonoBehaviour
 	public int JobSkillPoint, HobbySkillPoint;
 
 	[SerializeField]
-	private Text SkillPoints;
+	private Text JobSkillPointText, HobbySkillPointText;
 
 	// Use this for initialization
 	void Start ()
@@ -25,7 +25,8 @@ public class SkillSet : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
+		JobSkillPointText.text = JobSkillPoint.ToString();
+		HobbySkillPointText.text = HobbySkillPoint.ToString();
 	}
 
 	public IEnumerator showSkillMasterList()
@@ -59,7 +60,9 @@ public class SkillSet : MonoBehaviour
 
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
-			SkillPoints.text = (JobSkillPoint + HobbySkillPoint).ToString();
+
+			JobSkillPointText.text = JobSkillPoint.ToString();
+			HobbySkillPointText.text = HobbySkillPoint.ToString();
 
 			foreach(var data in skillList) {
 				var SkillData = data.Value as Dictionary<string,object>;
