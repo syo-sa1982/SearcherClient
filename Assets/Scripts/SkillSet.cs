@@ -55,7 +55,7 @@ public class SkillSet : MonoBehaviour
 			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 			Debug.Log(skillSetAPI);
 
-			var skillList = skillSetAPI ["SkillMaster"] as Dictionary<string,object>;
+			var skillList = skillSetAPI ["SkillMaster"] as List<object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
@@ -65,7 +65,7 @@ public class SkillSet : MonoBehaviour
 			HobbySkillPointText.text = HobbySkillPoint.ToString();
 
 			foreach(var data in skillList) {
-				var SkillData = data.Value as Dictionary<string,object>;
+				var SkillData = data as Dictionary<string,object>;
 				if (System.Convert.ToInt32(SkillData["ID"]) != HIDE_CATEGORY) {
 					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
 					skillField.transform.SetParent(canvasObject.transform,false);
