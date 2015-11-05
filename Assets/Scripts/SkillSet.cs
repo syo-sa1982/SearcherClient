@@ -8,7 +8,7 @@ public class SkillSet : MonoBehaviour
 
 	public GameObject canvasObject;
 
-	const int HIDE_CATEGORY = 13;
+	const int HIDE_CATEGORY = 6;
 
 	[SerializeField]
 	public int JobSkillPoint, HobbySkillPoint;
@@ -66,7 +66,7 @@ public class SkillSet : MonoBehaviour
 
 			foreach(var data in skillList) {
 				var SkillData = data as Dictionary<string,object>;
-				if (System.Convert.ToInt32(SkillData["ID"]) != HIDE_CATEGORY) {
+				if (System.Convert.ToInt32(SkillData["CategoryID"]) != HIDE_CATEGORY) {
 					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
 					skillField.transform.SetParent(canvasObject.transform,false);
 
