@@ -1,21 +1,17 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
 
 public class JobSelect : MonoBehaviour 
 {
 
-	public GameObject canvasObject;
+	public GameObject JobListContent;
 
 	// Use this for initialization
 	void Start () 
 	{
 		StartCoroutine (showJobList());
-	}
-	
-	// Update is called once per frame
-	void Update () 
-	{
-	
 	}
 
 	public IEnumerator showJobList()
@@ -31,7 +27,7 @@ public class JobSelect : MonoBehaviour
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
 
-		WWW www = new WWW(url);
+		WWW www = new WWW(url, form);
 
 		yield return www;
 
@@ -41,6 +37,22 @@ public class JobSelect : MonoBehaviour
 			Debug.Log ("Success");
 
 			Debug.Log (www.text);
+			var jobAPI = MiniJSON.Json.Deserialize(www.text) as Dictionary<string,object>;
+			Debug.Log(jobAPI);
+
+			var JobList = jobAPI["JobMaster"] as List<object>;
+
+
+			foreach(var data in JobList) {
+				var JobData = data as Dictionary<string,object>;
+				Debug.Log(JobData);
+				Debug.Log(JobData["JobName"]);
+
+				GameObject jobField = (GameObject)Instantiate(Resources.Load("Prefabs/JobSelect/JobField"));
+				jobField.transform.SetParent(JobListContent.transform,false);
+				JobFieldController fieldController = jobField.GetComponent<JobFieldController> ();
+				fieldController.setJobData (JobData);
+			}
 		}
 	}
 }
