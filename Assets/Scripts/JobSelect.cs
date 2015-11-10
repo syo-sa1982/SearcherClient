@@ -8,6 +8,10 @@ public class JobSelect : MonoBehaviour
 
 	public GameObject JobListContent;
 
+	[SerializeField]
+	private ToggleGroup mToggleGroup;
+
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -50,6 +54,8 @@ public class JobSelect : MonoBehaviour
 
 				GameObject jobField = (GameObject)Instantiate(Resources.Load("Prefabs/JobSelect/JobField"));
 				jobField.transform.SetParent(JobListContent.transform,false);
+				jobField.GetComponent<Toggle> ().group = mToggleGroup;
+
 				JobFieldController fieldController = jobField.GetComponent<JobFieldController> ();
 				fieldController.setJobData (JobData);
 			}
