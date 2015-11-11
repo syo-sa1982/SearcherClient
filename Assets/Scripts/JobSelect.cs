@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -11,6 +12,7 @@ public class JobSelect : MonoBehaviour
 	[SerializeField]
 	private ToggleGroup mToggleGroup;
 
+	private int SelectJob;
 
 	// Use this for initialization
 	void Start () 
@@ -56,9 +58,16 @@ public class JobSelect : MonoBehaviour
 				jobField.transform.SetParent(JobListContent.transform,false);
 				jobField.GetComponent<Toggle> ().group = mToggleGroup;
 
+
 				JobFieldController fieldController = jobField.GetComponent<JobFieldController> ();
 				fieldController.setJobData (JobData);
 			}
 		}
 	}
+
+	public void ChangeSelectJob(object checkJob)
+	{
+		SelectJob = System.Convert.ToInt32(checkJob);
+	}
+
 }
