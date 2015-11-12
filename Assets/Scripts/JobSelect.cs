@@ -11,12 +11,15 @@ public class JobSelect : MonoBehaviour
 
 	[SerializeField]
 	private ToggleGroup mToggleGroup;
+	[SerializeField]
+	private Button submitBtn;
 
-	private int SelectJob;
+	public static int SelectJob;
 
 	// Use this for initialization
 	void Start () 
 	{
+		submitBtn.gameObject.SetActive (false);
 		StartCoroutine (showJobList());
 	}
 
@@ -67,7 +70,15 @@ public class JobSelect : MonoBehaviour
 
 	public void ChangeSelectJob(object checkJob)
 	{
+		submitBtn.gameObject.SetActive (true);
 		SelectJob = System.Convert.ToInt32(checkJob);
+	}
+
+	public void SendJobID()
+	{
+		Debug.Log (SelectJob);
+
+		Application.LoadLevel ("CharaMake");
 	}
 
 }
