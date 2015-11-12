@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -10,11 +11,15 @@ public class JobSelect : MonoBehaviour
 
 	[SerializeField]
 	private ToggleGroup mToggleGroup;
+	[SerializeField]
+	private Button submitBtn;
 
+	public static int SelectJob;
 
 	// Use this for initialization
 	void Start () 
 	{
+		submitBtn.gameObject.SetActive (false);
 		StartCoroutine (showJobList());
 	}
 
@@ -56,9 +61,24 @@ public class JobSelect : MonoBehaviour
 				jobField.transform.SetParent(JobListContent.transform,false);
 				jobField.GetComponent<Toggle> ().group = mToggleGroup;
 
+
 				JobFieldController fieldController = jobField.GetComponent<JobFieldController> ();
 				fieldController.setJobData (JobData);
 			}
 		}
 	}
+
+	public void ChangeSelectJob(object checkJob)
+	{
+		submitBtn.gameObject.SetActive (true);
+		SelectJob = System.Convert.ToInt32(checkJob);
+	}
+
+	public void SendJobID()
+	{
+		Debug.Log (SelectJob);
+
+		Application.LoadLevel ("CharaMake");
+	}
+
 }

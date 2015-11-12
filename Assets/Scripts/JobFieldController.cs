@@ -13,9 +13,14 @@ public class JobFieldController : MonoBehaviour
 
 	public void setJobData(Dictionary<string,object> paramJobData)
 	{
-		Debug.Log (paramJobData);
-		Debug.Log (paramJobData["JobName"]);
 		this.JobData = paramJobData;
 		JobName.text = (string)JobData["JobName"];
+	}
+
+	public void ChangeSelectedJob()
+	{
+		GameObject _parent = transform.root.gameObject;
+		JobSelect jobSelect = _parent.GetComponent<JobSelect> ();
+		jobSelect.ChangeSelectJob (JobData["ID"]);
 	}
 }
