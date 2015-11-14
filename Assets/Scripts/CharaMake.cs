@@ -135,6 +135,7 @@ public class CharaMake : MonoBehaviour
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
+		form.AddField ("JobID", JobSelect.SelectJob);
 
 		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
 			form.AddField (data.Key, data.Value.text.ToString());
