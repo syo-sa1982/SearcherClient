@@ -80,7 +80,7 @@ public class UUIDManager : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			Application.LoadLevel ("CharaMake");
+			Application.LoadLevel ("JobSelect");
 
 		}
 
