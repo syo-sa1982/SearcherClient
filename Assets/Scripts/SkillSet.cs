@@ -16,11 +16,15 @@ public class SkillSet : MonoBehaviour
 	[SerializeField]
 	private Text JobSkillPointText, HobbySkillPointText;
 
+	[SerializeField]
+	private Button submitBtn;
+
 	public List<object> JobList, JobSkillList;
 
 	// Use this for initialization
 	void Start ()
 	{
+		submitBtn.gameObject.SetActive (false);
 		StartCoroutine (showSkillMasterList());
 	}
 	
@@ -29,6 +33,11 @@ public class SkillSet : MonoBehaviour
 	{
 		JobSkillPointText.text = JobSkillPoint.ToString();
 		HobbySkillPointText.text = HobbySkillPoint.ToString();
+		if (JobSkillPoint == 0 && HobbySkillPoint == 0) {
+			submitBtn.gameObject.SetActive (true);
+		} else {
+			submitBtn.gameObject.SetActive (false);
+		}
 	}
 
 	public IEnumerator showSkillMasterList()
