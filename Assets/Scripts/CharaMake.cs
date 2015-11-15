@@ -14,14 +14,17 @@ public class CharaMake : MonoBehaviour
 	[SerializeField]
 	private Text Hp,Mp,Sanity,Luck,Knowledge,Idea,JobSkillPoint,HobbySkillPoint,DamageBonus;
 
+	[SerializeField]
+	private Button submitBtn;
+
 	private Dictionary<string, string> RollData;
 	private Dictionary<string, InputField> BaseStatus;
 	private Dictionary<string, Text> CharaStatus;
 
 	void Awake () 
 	{
-		Debug.Log ("JobSelect");
-		Debug.Log (JobSelect.SelectJob);
+		submitBtn.gameObject.SetActive (false);
+
 		string roll3D6 = "6,3";// 3D6
 		string roll2D6Plus6 = "6,2,6";// 2D6+6
 		string roll3D6Plus3 = "6,3,3";// 3D6+3
@@ -62,9 +65,6 @@ public class CharaMake : MonoBehaviour
 			{"HobbySkillPoint",HobbySkillPoint},
 			{"DamageBonus",DamageBonus}
 		};
-
-
-
 	}
 
 	public void ParamGenerate()
@@ -94,6 +94,7 @@ public class CharaMake : MonoBehaviour
 		} else {
 			Debug.Log ("success");
 			Debug.Log (www.text);
+			submitBtn.gameObject.SetActive (true);
 
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
 
