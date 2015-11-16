@@ -21,8 +21,12 @@ public class CharaMake : MonoBehaviour
 	private Dictionary<string, InputField> BaseStatus;
 	private Dictionary<string, Text> CharaStatus;
 
+	private int SelectJob;
+
 	void Awake () 
 	{
+		SelectJob = PlayerPrefs.GetInt("jobid");
+		Debug.Log (SelectJob);
 		submitBtn.gameObject.SetActive (false);
 
 		string roll3D6 = "6,3";// 3D6
@@ -136,7 +140,7 @@ public class CharaMake : MonoBehaviour
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
-		form.AddField ("JobID", JobSelect.SelectJob);
+		form.AddField ("JobID", SelectJob);
 
 		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
 			form.AddField (data.Key, data.Value.text.ToString());

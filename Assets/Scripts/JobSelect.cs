@@ -14,8 +14,6 @@ public class JobSelect : MonoBehaviour
 	[SerializeField]
 	private Button submitBtn;
 
-	public static int SelectJob;
-
 	// Use this for initialization
 	void Start () 
 	{
@@ -71,13 +69,15 @@ public class JobSelect : MonoBehaviour
 	public void ChangeSelectJob(object checkJob)
 	{
 		submitBtn.gameObject.SetActive (true);
-		SelectJob = System.Convert.ToInt32(checkJob);
+		int selectJob = System.Convert.ToInt32(checkJob);
+		Debug.Log (selectJob);
+
+		PlayerPrefs.SetInt("jobid",selectJob);
+		PlayerPrefs.Save();
 	}
 
 	public void SendJobID()
 	{
-		Debug.Log (SelectJob);
-
 		Application.LoadLevel ("CharaMake");
 	}
 
