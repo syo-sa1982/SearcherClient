@@ -23,11 +23,11 @@ public class SkillFieldController : MonoBehaviour
 	{
 		skillset = GameObject.Find("Canvas").GetComponent<SkillSet> ();
 
-		Debug.Log (skillset.HobbySkillPoint);
-		Debug.Log (skillset.JobSkillPoint);
-		Debug.Log (skillset.JobList);
-		Debug.Log (skillset.JobSkillList);
-		Debug.Log ("awake");
+//		Debug.Log (skillset.HobbySkillPoint);
+//		Debug.Log (skillset.JobSkillPoint);
+//		Debug.Log (skillset.Job);
+//		Debug.Log (skillset.JobSkillList);
+//		Debug.Log ("awake");
 	}
 
 	public void setSkillData(Dictionary<string,object> paramSkillData)
