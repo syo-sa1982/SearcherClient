@@ -19,7 +19,8 @@ public class SkillSet : MonoBehaviour
 	[SerializeField]
 	private Button submitBtn;
 
-	public List<object> Job, JobSkillList;
+	public Dictionary<string,object> Job;
+	public List<object> JobSkillList;
 
 	// Use this for initialization
 	void Start ()
@@ -69,10 +70,9 @@ public class SkillSet : MonoBehaviour
 			var skillList = skillSetAPI ["SkillMaster"] as List<object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 
-			Job = skillSetAPI ["JobMaster"] as List<object>;
+
+			Job = skillSetAPI ["JobMaster"] as Dictionary<string,object>;
 			JobSkillList = skillSetAPI ["JobSkillMaster"] as List<object>;
-
-
 
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);

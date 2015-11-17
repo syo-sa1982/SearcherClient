@@ -25,8 +25,8 @@ public class SkillFieldController : MonoBehaviour
 
 //		Debug.Log (skillset.HobbySkillPoint);
 //		Debug.Log (skillset.JobSkillPoint);
-//		Debug.Log (skillset.Job);
-//		Debug.Log (skillset.JobSkillList);
+		Debug.Log (skillset.Job);
+		Debug.Log (skillset.JobSkillList);
 //		Debug.Log ("awake");
 	}
 
