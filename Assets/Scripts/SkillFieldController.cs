@@ -19,6 +19,9 @@ public class SkillFieldController : MonoBehaviour
 	[SerializeField]
 	private InputField SkillValue;
 
+	private bool isJobSkill;
+	private bool isRequiredSkill;
+
 	void Awake()
 	{
 		skillset = GameObject.Find("Canvas").GetComponent<SkillSet> ();
@@ -34,6 +37,8 @@ public class SkillFieldController : MonoBehaviour
 	{
 		this.SkillData = paramSkillData;
 		SkillName.text = (string)SkillData ["SkillName"];
+
+		Debug.Log(this.SkillData["ID"] + ":" + this.SkillData["Value"]);
 		this.DefaultValue = System.Convert.ToInt32(SkillData ["Value"]);
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();

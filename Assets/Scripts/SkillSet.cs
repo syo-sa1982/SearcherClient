@@ -9,6 +9,7 @@ public class SkillSet : MonoBehaviour
 	public GameObject canvasObject;
 
 	const int HIDE_CATEGORY = 6;
+	const int MAX_JOB_SKILL = 8;
 
 	[SerializeField]
 	public int JobSkillPoint, HobbySkillPoint;
@@ -21,6 +22,8 @@ public class SkillSet : MonoBehaviour
 
 	public Dictionary<string,object> Job;
 	public List<object> JobSkillList;
+
+	public int SelectJobSkillMaxNum;
 
 	// Use this for initialization
 	void Start ()
