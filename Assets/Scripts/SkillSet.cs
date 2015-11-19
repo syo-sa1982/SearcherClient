@@ -15,7 +15,7 @@ public class SkillSet : MonoBehaviour
 	public int JobSkillPoint, HobbySkillPoint;
 
 	[SerializeField]
-	private Text JobSkillPointText, HobbySkillPointText;
+	private Text JobSkillPointText, HobbySkillPointText, JobText;
 
 	[SerializeField]
 	private Button submitBtn;
@@ -68,14 +68,22 @@ public class SkillSet : MonoBehaviour
 
 			Debug.Log(www.text);
 			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-			Debug.Log(skillSetAPI);
 
 			var skillList = skillSetAPI ["SkillMaster"] as List<object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 
 
 			Job = skillSetAPI ["JobMaster"] as Dictionary<string,object>;
+			Debug.Log(skillSetAPI ["JobSkillMaster"]);
 			JobSkillList = skillSetAPI ["JobSkillMaster"] as List<object>;
+
+			JobText.text = Job["JobName"].ToString();
+
+			Debug.Log(Job["JobName"]);
+			Debug.Log(JobSkillList);
+//			Debug.Log(JobSkillList[0]["ID"]);
+//			Debug.Log(JobSkillList[0]["ID"] + ":" + JobSkillList[0]["SkillID"] + ":" + JobSkillList[0]["SkillType"]);
+
 
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);

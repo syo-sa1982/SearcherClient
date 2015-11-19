@@ -19,18 +19,12 @@ public class SkillFieldController : MonoBehaviour
 	[SerializeField]
 	private InputField SkillValue;
 
-	private bool isJobSkill;
-	private bool isRequiredSkill;
+	private bool isSelectJobSkill = false;
+	private bool isRequiredJobSkill = false;
 
 	void Awake()
 	{
 		skillset = GameObject.Find("Canvas").GetComponent<SkillSet> ();
-
-//		Debug.Log (skillset.HobbySkillPoint);
-//		Debug.Log (skillset.JobSkillPoint);
-		Debug.Log (skillset.Job);
-		Debug.Log (skillset.JobSkillList);
-//		Debug.Log ("awake");
 	}
 
 	public void setSkillData(Dictionary<string,object> paramSkillData)
@@ -39,6 +33,7 @@ public class SkillFieldController : MonoBehaviour
 		SkillName.text = (string)SkillData ["SkillName"];
 
 		Debug.Log(this.SkillData["ID"] + ":" + this.SkillData["Value"]);
+
 		this.DefaultValue = System.Convert.ToInt32(SkillData ["Value"]);
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
