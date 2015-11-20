@@ -37,6 +37,10 @@ public class SkillFieldController : MonoBehaviour
 		this.DefaultValue = System.Convert.ToInt32(SkillData ["Value"]);
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
+		SetSkillType();
+		
+		Debug.Log("isSelectJobSkill:" + isSelectJobSkill);
+		Debug.Log("isRequiredJobSkill:" + isRequiredJobSkill);
 	}
 
 	public void CountUp()
@@ -67,6 +71,23 @@ public class SkillFieldController : MonoBehaviour
 	bool isPointLost()
 	{
 		return (skillset.JobSkillPoint < 1) ? true : false;
+	}
+
+	 void SetSkillType()
+	{
+		foreach(var data in skillset.JobSkillList){
+			if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"]) && System.Convert.ToInt32(data["SkillType"]) > 0 ){
+				Debug.Log (" senntakusukiru");
+				isSelectJobSkill = true;
+				return;
+			} else if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"])) {
+				Debug.Log ("hissusukiru");
+				isRequiredJobSkill = true;
+				return;
+			}
+		}
+
+//		return false;
 	}
 
 }
