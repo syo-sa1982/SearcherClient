@@ -9,18 +9,21 @@ public class SkillSet : MonoBehaviour
 	public GameObject canvasObject;
 
 	const int HIDE_CATEGORY = 6;
+	const int MAX_JOB_SKILL = 8;
 
 	[SerializeField]
 	public int JobSkillPoint, HobbySkillPoint;
 
 	[SerializeField]
-	private Text JobSkillPointText, HobbySkillPointText;
+	private Text JobSkillPointText, HobbySkillPointText, JobText;
 
 	[SerializeField]
 	private Button submitBtn;
 
 	public Dictionary<string,object> Job;
-	public List<object> JobSkillList;
+	public List<Dictionary<string,object>> JobSkillList = new List<Dictionary<string, object>>(){};
+
+	public int SelectJobSkillMaxNum;
 
 	// Use this for initialization
 	void Start ()
@@ -65,14 +68,26 @@ public class SkillSet : MonoBehaviour
 
 			Debug.Log(www.text);
 			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-			Debug.Log(skillSetAPI);
 
 			var skillList = skillSetAPI ["SkillMaster"] as List<object>;
 			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
 
 
 			Job = skillSetAPI ["JobMaster"] as Dictionary<string,object>;
-			JobSkillList = skillSetAPI ["JobSkillMaster"] as List<object>;
+			JobText.text = Job["JobName"].ToString();
+			
+			Debug.Log(Job["JobName"]);
+			Debug.Log(skillSetAPI ["JobSkillMaster"]);
+			var jobSkillList = skillSetAPI ["JobSkillMaster"] as List<object>;
+
+			Debug.Log(jobSkillList);
+			Debug.Log(JobSkillList);
+			
+			foreach(var data in jobSkillList) {
+				JobSkillList.Add(data as Dictionary<string,object>);
+			}
+			Debug.Log(JobSkillList[0]["ID"] + ":" + JobSkillList[0]["SkillID"] + ":" + JobSkillList[0]["SkillType"]);
+
 
 			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
 			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
