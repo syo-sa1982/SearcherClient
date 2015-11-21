@@ -35,13 +35,12 @@ public class SkillFieldController : MonoBehaviour
 		this.SkillData = paramSkillData;
 		SkillName.text = SkillData.SkillName;
 
-//		Debug.Log(this.SkillData["ID"] + ":" + this.SkillData["Value"]);
-
 		this.DefaultValue = SkillData.Value;
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
 		SetSkillType();
 		
+		Debug.Log("SkillName:" + SkillData.SkillName);
 		Debug.Log("isSelectJobSkill:" + isSelectJobSkill);
 		Debug.Log("isRequiredJobSkill:" + isRequiredJobSkill);
 	}
@@ -60,10 +59,8 @@ public class SkillFieldController : MonoBehaviour
 	{
 		CurrentValue--;
 		if (isOutofRange()){CurrentValue++; return;}
-
 		skillset.jobSkillPoint++;
 		skillset.hobbySkillPoint++;
-
 		SkillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -80,19 +77,16 @@ public class SkillFieldController : MonoBehaviour
 
 	 void SetSkillType()
 	{
-//		foreach(var data in skillset.JobSkillList){
-//			if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"]) && System.Convert.ToInt32(data["SkillType"]) > 0 ){
-//				Debug.Log (" senntakusukiru");
-//				isSelectJobSkill = true;
-//				return;
-//			} else if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"])) {
-//				Debug.Log ("hissusukiru");
-//				isRequiredJobSkill = true;
-//				return;
-//			}
-//		}
-//
-//		return false;
+		foreach(var data in skillset.jobSkillArray){
+			if(SkillData.ID == data.SkillID && data.SkillType > 0 ){
+				isSelectJobSkill = true;
+				return;
+			} else if(SkillData.ID == data.SkillID){
+				isRequiredJobSkill = true;
+				return;
+			}
+		}
+		return;
 	}
 
 }

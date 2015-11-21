@@ -24,7 +24,7 @@ public class SkillSet : MonoBehaviour
 	[SerializeField]
 	private Button submitBtn;
 
-	public JobSkill[] JobSkillArray = new JobSkill[]{};
+	public JobSkill[] jobSkillArray = new JobSkill[]{};
 
 	public int SelectJobSkillMaxNum;
 
@@ -70,11 +70,9 @@ public class SkillSet : MonoBehaviour
 			Debug.Log("Success");
 
 			Debug.Log(www.text);
-			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
-
 			JsonData jsonData = LitJson.JsonMapper.ToObject(www.text);
 
-			JobSkillArray = LitJson.JsonMapper.ToObject<JobSkill[]>(LitJson.JsonMapper.ToJson(jsonData["JobSkillMaster"]));
+			jobSkillArray = LitJson.JsonMapper.ToObject<JobSkill[]>(LitJson.JsonMapper.ToJson(jsonData["JobSkillMaster"]));
 			Skill[] SkillList = LitJson.JsonMapper.ToObject<Skill[]>(LitJson.JsonMapper.ToJson(jsonData["SkillMaster"]));
 
 			foreach(var skillData in SkillList) {
