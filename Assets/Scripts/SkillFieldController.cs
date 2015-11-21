@@ -3,10 +3,13 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+using LitJson;
+
+
 public class SkillFieldController : MonoBehaviour 
 {
 
-	private Dictionary<string,object> SkillData;
+	private Skill SkillData;
 	private int DefaultValue;
 	private int CurrentValue;
 	private SkillSet skillset;
@@ -27,14 +30,14 @@ public class SkillFieldController : MonoBehaviour
 		skillset = GameObject.Find("Canvas").GetComponent<SkillSet> ();
 	}
 
-	public void setSkillData(Dictionary<string,object> paramSkillData)
+	public void setSkillData(Skill paramSkillData)
 	{
 		this.SkillData = paramSkillData;
-		SkillName.text = (string)SkillData ["SkillName"];
+		SkillName.text = SkillData.SkillName;
 
-		Debug.Log(this.SkillData["ID"] + ":" + this.SkillData["Value"]);
+//		Debug.Log(this.SkillData["ID"] + ":" + this.SkillData["Value"]);
 
-		this.DefaultValue = System.Convert.ToInt32(SkillData ["Value"]);
+		this.DefaultValue = SkillData.Value;
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
 		SetSkillType();
@@ -46,9 +49,10 @@ public class SkillFieldController : MonoBehaviour
 	public void CountUp()
 	{
 		CurrentValue++;
-		if (isOutofRange() || isPointLost()){CurrentValue--; return;}
-		skillset.JobSkillPoint--;
-		SkillData ["Value"] = (object)CurrentValue;
+		if (isOutofRange() || isJobPointLost()){CurrentValue--; return;}
+		skillset.jobSkillPoint--;
+		skillset.hobbySkillPoint--;
+		SkillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
@@ -57,9 +61,10 @@ public class SkillFieldController : MonoBehaviour
 		CurrentValue--;
 		if (isOutofRange()){CurrentValue++; return;}
 
-		skillset.JobSkillPoint++;
+		skillset.jobSkillPoint++;
+		skillset.hobbySkillPoint++;
 
-		SkillData ["Value"] = (object)CurrentValue;
+		SkillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
@@ -68,25 +73,25 @@ public class SkillFieldController : MonoBehaviour
 		return (CurrentValue > MAX_VALUE || CurrentValue < DefaultValue) ? true : false;
 	}
 
-	bool isPointLost()
+	bool isJobPointLost()
 	{
-		return (skillset.JobSkillPoint < 1) ? true : false;
+		return (skillset.playerStatus.JobSkillPoint < 1) ? true : false;
 	}
 
 	 void SetSkillType()
 	{
-		foreach(var data in skillset.JobSkillList){
-			if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"]) && System.Convert.ToInt32(data["SkillType"]) > 0 ){
-				Debug.Log (" senntakusukiru");
-				isSelectJobSkill = true;
-				return;
-			} else if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"])) {
-				Debug.Log ("hissusukiru");
-				isRequiredJobSkill = true;
-				return;
-			}
-		}
-
+//		foreach(var data in skillset.JobSkillList){
+//			if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"]) && System.Convert.ToInt32(data["SkillType"]) > 0 ){
+//				Debug.Log (" senntakusukiru");
+//				isSelectJobSkill = true;
+//				return;
+//			} else if(System.Convert.ToInt32(SkillData["ID"]) == System.Convert.ToInt32(data["SkillID"])) {
+//				Debug.Log ("hissusukiru");
+//				isRequiredJobSkill = true;
+//				return;
+//			}
+//		}
+//
 //		return false;
 	}
 
