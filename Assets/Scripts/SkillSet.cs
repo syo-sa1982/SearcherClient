@@ -3,6 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System.Collections.Generic;
 
+using LitJson;
+
 public class SkillSet : MonoBehaviour
 {
 
@@ -10,9 +12,11 @@ public class SkillSet : MonoBehaviour
 
 	const int HIDE_CATEGORY = 6;
 	const int MAX_JOB_SKILL = 8;
+//
+//	[SerializeField]
+	public int jobSkillPoint = 0, hobbySkillPoint = 0;
 
-	[SerializeField]
-	public int JobSkillPoint, HobbySkillPoint;
+	public PlayerStatus playerStatus;
 
 	[SerializeField]
 	private Text JobSkillPointText, HobbySkillPointText, JobText;
@@ -20,8 +24,7 @@ public class SkillSet : MonoBehaviour
 	[SerializeField]
 	private Button submitBtn;
 
-	public Dictionary<string,object> Job;
-	public List<Dictionary<string,object>> JobSkillList = new List<Dictionary<string, object>>(){};
+	public JobSkill[] jobSkillArray = new JobSkill[]{};
 
 	public int SelectJobSkillMaxNum;
 
@@ -35,9 +38,9 @@ public class SkillSet : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		JobSkillPointText.text = JobSkillPoint.ToString();
-		HobbySkillPointText.text = HobbySkillPoint.ToString();
-		if (JobSkillPoint == 0 && HobbySkillPoint == 0) {
+		JobSkillPointText.text = jobSkillPoint.ToString();
+		HobbySkillPointText.text = hobbySkillPoint.ToString();
+		if (jobSkillPoint == 0 && hobbySkillPoint == 0) {
 			submitBtn.gameObject.SetActive (true);
 		} else {
 			submitBtn.gameObject.SetActive (false);
@@ -67,45 +70,30 @@ public class SkillSet : MonoBehaviour
 			Debug.Log("Success");
 
 			Debug.Log(www.text);
-			var skillSetAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			JsonData jsonData = LitJson.JsonMapper.ToObject(www.text);
 
-			var skillList = skillSetAPI ["SkillMaster"] as List<object>;
-			var playerStatus = skillSetAPI ["PlayerStatus"] as Dictionary<string,object>;
+			jobSkillArray = LitJson.JsonMapper.ToObject<JobSkill[]>(LitJson.JsonMapper.ToJson(jsonData["JobSkillMaster"]));
+			Skill[] SkillList = LitJson.JsonMapper.ToObject<Skill[]>(LitJson.JsonMapper.ToJson(jsonData["SkillMaster"]));
 
-
-			Job = skillSetAPI ["JobMaster"] as Dictionary<string,object>;
-			JobText.text = Job["JobName"].ToString();
-			
-			Debug.Log(Job["JobName"]);
-			Debug.Log(skillSetAPI ["JobSkillMaster"]);
-			var jobSkillList = skillSetAPI ["JobSkillMaster"] as List<object>;
-
-			Debug.Log(jobSkillList);
-			Debug.Log(JobSkillList);
-			
-			foreach(var data in jobSkillList) {
-				JobSkillList.Add(data as Dictionary<string,object>);
-			}
-			Debug.Log(JobSkillList[0]["ID"] + ":" + JobSkillList[0]["SkillID"] + ":" + JobSkillList[0]["SkillType"]);
-
-
-			JobSkillPoint = System.Convert.ToInt32(playerStatus["JobSkillPoint"]);
-			HobbySkillPoint = System.Convert.ToInt32 (playerStatus["HobbySkillPoint"]);
-
-			JobSkillPointText.text = JobSkillPoint.ToString();
-			HobbySkillPointText.text = HobbySkillPoint.ToString();
-
-			foreach(var data in skillList) {
-				var SkillData = data as Dictionary<string,object>;
-				if (System.Convert.ToInt32(SkillData["CategoryID"]) != HIDE_CATEGORY) {
+			foreach(var skillData in SkillList) {
+				if (skillData.CategoryID != HIDE_CATEGORY) {
 					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
 					skillField.transform.SetParent(canvasObject.transform,false);
-
 					SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
-					fieldController.setSkillData (SkillData);
-				} 
-
+					fieldController.setSkillData (skillData);
+				}
 			}
+
+			playerStatus = LitJson.JsonMapper.ToObject<PlayerStatus>(LitJson.JsonMapper.ToJson(jsonData["PlayerStatus"]));
+			jobSkillPoint = playerStatus.JobSkillPoint;
+			JobSkillPointText.text = jobSkillPoint.ToString();
+			hobbySkillPoint = playerStatus.HobbySkillPoint;
+			HobbySkillPointText.text = hobbySkillPoint.ToString();
+
+			Job JobData = LitJson.JsonMapper.ToObject<Job>(LitJson.JsonMapper.ToJson(jsonData["JobMaster"]));
+			JobText.text = JobData.JobName;
+
 		}
 	}
 }
+
