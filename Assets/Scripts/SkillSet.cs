@@ -12,7 +12,7 @@ public class SkillSet : MonoBehaviour
 	const int HIDE_CATEGORY = 6;
 	const int MAX_JOB_SKILL = 8;
 	
-	public GameObject canvasObject;
+	public GameObject ListObject;
 	public int jobSkillPoint = 0, hobbySkillPoint = 0;
 	public PlayerStatus playerStatus;
 	public JobSkill[] jobSkillArray = new JobSkill[]{};
@@ -75,7 +75,7 @@ public class SkillSet : MonoBehaviour
 			foreach(var skillData in SkillList) {
 				if (skillData.CategoryID != HIDE_CATEGORY) {
 					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
-					skillField.transform.SetParent(canvasObject.transform,false);
+					skillField.transform.SetParent(ListObject.transform,false);
 					SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
 					fieldController.setSkillData (skillData);
 				}
@@ -97,7 +97,7 @@ public class SkillSet : MonoBehaviour
 	
 	public void SubmitSkillSet()
 	{
-		StartCoroutine(sendSkillSetApi);
+		StartCoroutine(sendSkillSetApi());
 	}
 
 	IEnumerator sendSkillSetApi()
@@ -113,6 +113,15 @@ public class SkillSet : MonoBehaviour
 		form.AddField ("UUID", _uuid);
 		
 		WWW www = new WWW(url, form);
+
+		var skillList = ListObject.GetComponentsInChildren(typeof(SkillFieldController));
+
+		foreach(SkillFieldController skill in skillList){
+			Debug.Log( skill.SkillData.SkillName);
+		}
+
+
+		yield return www;
 	}
 
 
