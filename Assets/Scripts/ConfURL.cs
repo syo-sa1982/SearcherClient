@@ -15,5 +15,6 @@ public static class ConfURL
 	public const string PLAYER_GENERATE = "player/generate";
 	public const string PLAYER_LIST = "player/list";
 	public const string PLAYER_SKILL_SETTING = "player/skill_setting";
+	public const string PLAYER_SKILL_SUBMIT = "player/skill_submit";
 
 }
