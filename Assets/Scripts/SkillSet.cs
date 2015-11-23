@@ -44,7 +44,7 @@ public class SkillSet : MonoBehaviour
 		}
 	}
 
-	public IEnumerator showSkillMasterList()
+	IEnumerator showSkillMasterList()
 	{
 		string _uuid;
 		if (PlayerPrefs.HasKey ("uuid")) {
@@ -94,5 +94,28 @@ public class SkillSet : MonoBehaviour
 
 		}
 	}
+	
+	public void SubmitSkillSet()
+	{
+		StartCoroutine(sendSkillSetApi);
+	}
+
+	IEnumerator sendSkillSetApi()
+	{
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SETTING;
+		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+		
+		WWW www = new WWW(url, form);
+	}
+
+
+
 }
 
