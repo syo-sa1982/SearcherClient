@@ -8,25 +8,22 @@ using LitJson;
 public class SkillSet : MonoBehaviour
 {
 
-	public GameObject canvasObject;
 
 	const int HIDE_CATEGORY = 6;
 	const int MAX_JOB_SKILL = 8;
-//
-//	[SerializeField]
+	
+	public GameObject canvasObject;
 	public int jobSkillPoint = 0, hobbySkillPoint = 0;
-
 	public PlayerStatus playerStatus;
+	public JobSkill[] jobSkillArray = new JobSkill[]{};
+	public int SelectJobSkillMaxNum = 8;
+
+	public List<int> selectedSkillID = new List<int>();
 
 	[SerializeField]
 	private Text JobSkillPointText, HobbySkillPointText, JobText;
-
 	[SerializeField]
 	private Button submitBtn;
-
-	public JobSkill[] jobSkillArray = new JobSkill[]{};
-
-	public int SelectJobSkillMaxNum;
 
 	// Use this for initialization
 	void Start ()
@@ -83,6 +80,8 @@ public class SkillSet : MonoBehaviour
 					fieldController.setSkillData (skillData);
 				}
 			}
+
+			Debug.Log("selectSkill is " + SelectJobSkillMaxNum);
 
 			playerStatus = LitJson.JsonMapper.ToObject<PlayerStatus>(LitJson.JsonMapper.ToJson(jsonData["PlayerStatus"]));
 			jobSkillPoint = playerStatus.JobSkillPoint;
