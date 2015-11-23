@@ -55,8 +55,15 @@ public class SkillFieldController : MonoBehaviour
 		if (isRequiredJobSkill) {
 			skillset.jobSkillPoint--;
 		} else if(isSelectJobSkill && (skillset.selectedSkillID.Contains(SkillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum)){
-				skillset.jobSkillPoint--;
-				if (!skillset.selectedSkillID.Contains(SkillData.ID)) { skillset.selectedSkillID.Add(SkillData.ID); }
+			if (!skillset.selectedSkillID.Contains(SkillData.ID)) {
+				if (SkillData.Value > DefaultValue) {
+					skillset.hobbySkillPoint += SkillData.Value - DefaultValue;
+					CurrentValue = DefaultValue + 1;
+					SkillData.Value = CurrentValue;
+				}
+				skillset.selectedSkillID.Add(SkillData.ID);
+			}
+			skillset.jobSkillPoint--;
 		} else {
 			skillset.hobbySkillPoint--;
 		}
