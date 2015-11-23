@@ -23,6 +23,7 @@ public class SkillFieldController : MonoBehaviour
 	private InputField SkillValue;
 
 	private bool isSelectJobSkill = false;
+	private bool isSelectedSkill = false;
 	private bool isRequiredJobSkill = false;
 
 	void Awake()
@@ -39,7 +40,7 @@ public class SkillFieldController : MonoBehaviour
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
 		SetSkillType();
-		
+
 		Debug.Log("SkillName:" + SkillData.SkillName);
 		Debug.Log("isSelectJobSkill:" + isSelectJobSkill);
 		Debug.Log("isRequiredJobSkill:" + isRequiredJobSkill);
@@ -48,9 +49,17 @@ public class SkillFieldController : MonoBehaviour
 	public void CountUp()
 	{
 		CurrentValue++;
-		if (isOutofRange() || isJobPointLost()){CurrentValue--; return;}
-		skillset.jobSkillPoint--;
-		skillset.hobbySkillPoint--;
+		Debug.Log (isPointLost());
+		if (isOutofRange() || isPointLost()){CurrentValue--; return;}
+
+		if (isRequiredJobSkill) {
+			skillset.jobSkillPoint--;
+		} else if(isSelectJobSkill && (skillset.selectedSkillID.Contains(SkillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum)){
+				skillset.jobSkillPoint--;
+				if (!skillset.selectedSkillID.Contains(SkillData.ID)) { skillset.selectedSkillID.Add(SkillData.ID); }
+		} else {
+			skillset.hobbySkillPoint--;
+		}
 		SkillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -59,8 +68,16 @@ public class SkillFieldController : MonoBehaviour
 	{
 		CurrentValue--;
 		if (isOutofRange()){CurrentValue++; return;}
-		skillset.jobSkillPoint++;
-		skillset.hobbySkillPoint++;
+
+		if (isRequiredJobSkill) {
+			skillset.jobSkillPoint++;
+		} else if(isSelectJobSkill && skillset.selectedSkillID.Contains(SkillData.ID)) {
+			skillset.jobSkillPoint++;
+			if (CurrentValue == DefaultValue) { skillset.selectedSkillID.Remove(SkillData.ID); }
+		} else {
+			skillset.hobbySkillPoint++;
+		}
+
 		SkillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
@@ -70,9 +87,13 @@ public class SkillFieldController : MonoBehaviour
 		return (CurrentValue > MAX_VALUE || CurrentValue < DefaultValue) ? true : false;
 	}
 
-	bool isJobPointLost()
+	bool isPointLost()
 	{
-		return (skillset.playerStatus.JobSkillPoint < 1) ? true : false;
+		if (isRequiredJobSkill || (isSelectJobSkill && (skillset.selectedSkillID.Contains(SkillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum))) {
+			return (skillset.jobSkillPoint < 1) ? true : false;
+		} else {
+			return (skillset.hobbySkillPoint < 1) ? true : false;
+		}
 	}
 
 	 void SetSkillType()
@@ -83,6 +104,7 @@ public class SkillFieldController : MonoBehaviour
 				return;
 			} else if(SkillData.ID == data.SkillID){
 				isRequiredJobSkill = true;
+				skillset.SelectJobSkillMaxNum--;
 				return;
 			}
 		}
