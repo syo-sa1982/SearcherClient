@@ -108,18 +108,27 @@ public class SkillSet : MonoBehaviour
 		} else {
 			yield break;
 		}
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SETTING;
+		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SUBMIT;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
-		
-		WWW www = new WWW(url, form);
 
 		var skillList = ListObject.GetComponentsInChildren(typeof(SkillFieldController));
-
+		List<Skill> skillApi = new List<Skill>();
 		foreach(SkillFieldController skill in skillList){
+			skillApi.Add(skill.SkillData);
 			Debug.Log( skill.SkillData.SkillName);
 		}
-
+		Debug.Log(LitJson.JsonMapper.ToJson(skillApi));
+		LitJson.JsonWriter writer1 = new LitJson.JsonWriter();
+		writer1.PrettyPrint = true;
+		writer1.IndentValue = 4;
+		LitJson.JsonMapper.ToJson(skillApi, writer1);
+		string json = writer1.ToString();
+		
+		Debug.Log(json);
+		form.AddField ("json_api", json);
+		
+		WWW www = new WWW(url, form);
 
 		yield return www;
 	}
