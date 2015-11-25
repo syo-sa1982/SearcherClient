@@ -9,7 +9,9 @@ using LitJson;
 public class SkillFieldController : MonoBehaviour 
 {
 
-	private Skill SkillData;
+	private Skill skillData;
+	public Skill SkillData{ get{return skillData;} }
+
 	private int DefaultValue;
 	private int CurrentValue;
 	private SkillSet skillset;
@@ -33,15 +35,15 @@ public class SkillFieldController : MonoBehaviour
 
 	public void setSkillData(Skill paramSkillData)
 	{
-		this.SkillData = paramSkillData;
-		SkillName.text = SkillData.SkillName;
+		this.skillData = paramSkillData;
+		SkillName.text = skillData.SkillName;
 
-		this.DefaultValue = SkillData.Value;
+		this.DefaultValue = skillData.Value;
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
 		SetSkillType();
 
-		Debug.Log("SkillName:" + SkillData.SkillName);
+		Debug.Log("SkillName:" + skillData.SkillName);
 		Debug.Log("isSelectJobSkill:" + isSelectJobSkill);
 		Debug.Log("isRequiredJobSkill:" + isRequiredJobSkill);
 	}
@@ -54,20 +56,20 @@ public class SkillFieldController : MonoBehaviour
 
 		if (isRequiredJobSkill) {
 			skillset.jobSkillPoint--;
-		} else if(isSelectJobSkill && (skillset.selectedSkillID.Contains(SkillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum)){
-			if (!skillset.selectedSkillID.Contains(SkillData.ID)) {
-				if (SkillData.Value > DefaultValue) {
-					skillset.hobbySkillPoint += SkillData.Value - DefaultValue;
+		} else if(isSelectJobSkill && (skillset.selectedSkillID.Contains(skillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum)){
+			if (!skillset.selectedSkillID.Contains(skillData.ID)) {
+				if (skillData.Value > DefaultValue) {
+					skillset.hobbySkillPoint += skillData.Value - DefaultValue;
 					CurrentValue = DefaultValue + 1;
-					SkillData.Value = CurrentValue;
+					skillData.Value = CurrentValue;
 				}
-				skillset.selectedSkillID.Add(SkillData.ID);
+				skillset.selectedSkillID.Add(skillData.ID);
 			}
 			skillset.jobSkillPoint--;
 		} else {
 			skillset.hobbySkillPoint--;
 		}
-		SkillData.Value = CurrentValue;
+		skillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
@@ -78,14 +80,14 @@ public class SkillFieldController : MonoBehaviour
 
 		if (isRequiredJobSkill) {
 			skillset.jobSkillPoint++;
-		} else if(isSelectJobSkill && skillset.selectedSkillID.Contains(SkillData.ID)) {
+		} else if(isSelectJobSkill && skillset.selectedSkillID.Contains(skillData.ID)) {
 			skillset.jobSkillPoint++;
-			if (CurrentValue == DefaultValue) { skillset.selectedSkillID.Remove(SkillData.ID); }
+			if (CurrentValue == DefaultValue) { skillset.selectedSkillID.Remove(skillData.ID); }
 		} else {
 			skillset.hobbySkillPoint++;
 		}
 
-		SkillData.Value = CurrentValue;
+		skillData.Value = CurrentValue;
 		SkillValue.text = CurrentValue.ToString ();
 	}
 
@@ -96,7 +98,7 @@ public class SkillFieldController : MonoBehaviour
 
 	bool isPointLost()
 	{
-		if (isRequiredJobSkill || (isSelectJobSkill && (skillset.selectedSkillID.Contains(SkillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum))) {
+		if (isRequiredJobSkill || (isSelectJobSkill && (skillset.selectedSkillID.Contains(skillData.ID) || skillset.selectedSkillID.Count < skillset.SelectJobSkillMaxNum))) {
 			return (skillset.jobSkillPoint < 1) ? true : false;
 		} else {
 			return (skillset.hobbySkillPoint < 1) ? true : false;
@@ -106,10 +108,10 @@ public class SkillFieldController : MonoBehaviour
 	 void SetSkillType()
 	{
 		foreach(var data in skillset.jobSkillArray){
-			if(SkillData.ID == data.SkillID && data.SkillType > 0 ){
+			if(skillData.ID == data.SkillID && data.SkillType > 0 ){
 				isSelectJobSkill = true;
 				return;
-			} else if(SkillData.ID == data.SkillID){
+			} else if(skillData.ID == data.SkillID){
 				isRequiredJobSkill = true;
 				skillset.SelectJobSkillMaxNum--;
 				return;
