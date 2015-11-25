@@ -118,15 +118,7 @@ public class SkillSet : MonoBehaviour
 			skillApi.Add(skill.SkillData);
 			Debug.Log( skill.SkillData.SkillName);
 		}
-		Debug.Log(LitJson.JsonMapper.ToJson(skillApi));
-		LitJson.JsonWriter writer1 = new LitJson.JsonWriter();
-		writer1.PrettyPrint = true;
-		writer1.IndentValue = 4;
-		LitJson.JsonMapper.ToJson(skillApi, writer1);
-		string json = writer1.ToString();
-		
-		Debug.Log(json);
-		form.AddField ("json_api", json);
+		form.AddField ("json_api", LitJson.JsonMapper.ToJson(skillApi));
 		
 		WWW www = new WWW(url, form);
 
