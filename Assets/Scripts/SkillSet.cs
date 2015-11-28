@@ -28,7 +28,7 @@ public class SkillSet : MonoBehaviour
 	// Use this for initialization
 	void Start ()
 	{
-		// submitBtn.gameObject.SetActive (false);
+		submitBtn.gameObject.SetActive (false);
 		StartCoroutine (showSkillMasterList());
 	}
 	
@@ -38,9 +38,9 @@ public class SkillSet : MonoBehaviour
 		JobSkillPointText.text = jobSkillPoint.ToString();
 		HobbySkillPointText.text = hobbySkillPoint.ToString();
 		if (jobSkillPoint == 0 && hobbySkillPoint == 0) {
-			// submitBtn.gameObject.SetActive (true);
+			submitBtn.gameObject.SetActive (true);
 		} else {
-			// submitBtn.gameObject.SetActive (false);
+			submitBtn.gameObject.SetActive (false);
 		}
 	}
 
