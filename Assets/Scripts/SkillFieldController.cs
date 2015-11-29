@@ -17,6 +17,7 @@ public class SkillFieldController : MonoBehaviour
 	private SkillSet skillset;
 
 	const int MAX_VALUE = 99;
+	const int HIDE_CATEGORY = 6;
 
 	[SerializeField]
 	private Text SkillName;
@@ -41,8 +42,14 @@ public class SkillFieldController : MonoBehaviour
 		this.DefaultValue = skillData.Value;
 		this.CurrentValue = DefaultValue;
 		SkillValue.text = DefaultValue.ToString ();
+		
 		SetSkillType();
-
+		if(skillData.CategoryID == HIDE_CATEGORY){
+			GameObject upBtn = gameObject.transform.FindChild("UPbtn").gameObject;
+			GameObject downBtn = gameObject.transform.FindChild("DOWNbtn").gameObject;
+			upBtn.SetActive (false);
+			downBtn.SetActive (false);
+		}
 		Debug.Log("SkillName:" + skillData.SkillName);
 		Debug.Log("isSelectJobSkill:" + isSelectJobSkill);
 		Debug.Log("isRequiredJobSkill:" + isRequiredJobSkill);

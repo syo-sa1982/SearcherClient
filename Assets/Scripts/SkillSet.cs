@@ -9,7 +9,6 @@ public class SkillSet : MonoBehaviour
 {
 
 
-	const int HIDE_CATEGORY = 6;
 	const int MAX_JOB_SKILL = 8;
 	
 	public GameObject ListObject;
@@ -73,12 +72,10 @@ public class SkillSet : MonoBehaviour
 			Skill[] SkillList = LitJson.JsonMapper.ToObject<Skill[]>(LitJson.JsonMapper.ToJson(jsonData["SkillMaster"]));
 
 			foreach(var skillData in SkillList) {
-				if (skillData.CategoryID != HIDE_CATEGORY) {
-					GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
-					skillField.transform.SetParent(ListObject.transform,false);
-					SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
-					fieldController.setSkillData (skillData);
-				}
+				GameObject skillField = (GameObject)Instantiate(Resources.Load("Prefabs/SkillSet/SkillField"));
+				skillField.transform.SetParent(ListObject.transform,false);
+				SkillFieldController fieldController = skillField.GetComponent<SkillFieldController>();
+				fieldController.setSkillData (skillData);
 			}
 
 			Debug.Log("selectSkill is " + SelectJobSkillMaxNum);
