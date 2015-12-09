@@ -31,13 +31,12 @@ public class JobSelect : MonoBehaviour
 		}
 
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_JOBLIST;
-		WWWForm form = new WWWForm ();
-		form.AddField ("UUID", _uuid);
 
-		WWW www = new WWW(url, form);
+		WWW www = new WWW(url);
 
 		yield return www;
 
+			Debug.Log (www.text);
 		if (www.error != null) {
 			Debug.Log ("Error");
 		} else {
