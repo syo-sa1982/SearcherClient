@@ -17,7 +17,7 @@
 # Unity3D generated meta files
 *.pidb.meta
 
-*.vscode
+.vscode
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
