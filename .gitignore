@@ -17,6 +17,9 @@
 # Unity3D generated meta files
 *.pidb.meta
 
+lanch.json
+setting.json
+
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
 .DS_Store
