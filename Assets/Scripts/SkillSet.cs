@@ -121,6 +121,9 @@ public class SkillSet : MonoBehaviour
 		WWW www = new WWW(url, form);
 
 		yield return www;
+		
+		
+		Application.LoadLevel ("Main");
 	}
 
 

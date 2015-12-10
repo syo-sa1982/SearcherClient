@@ -58,7 +58,7 @@ public class Title : MonoBehaviour {
 				Debug.Log ("登録ユーザーです");
 				audioSource.Play ();
 				yield return new WaitForSeconds (audioSource.clip.length);
-				Application.LoadLevel ("CharaSelect");
+				Application.LoadLevel ("Main");
 			} else {
 				Debug.Log ("登録ユーザーではない");
 			}
