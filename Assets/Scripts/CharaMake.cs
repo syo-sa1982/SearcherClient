@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -153,7 +154,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			Application.LoadLevel ("SkillSet");
+			SceneManager.LoadScene("SkillSet");
 		}
 
 	}

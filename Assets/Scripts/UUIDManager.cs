@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using System.Collections;
 
@@ -80,15 +81,10 @@ public class UUIDManager : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			Application.LoadLevel ("JobSelect");
+			SceneManager.LoadScene ("JobSelect");
 
 		}
-
-
 	}
-
-
-
 
 	public void Load()
 	{
