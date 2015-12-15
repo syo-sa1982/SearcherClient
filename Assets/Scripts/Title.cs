@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -58,7 +59,7 @@ public class Title : MonoBehaviour {
 				Debug.Log ("登録ユーザーです");
 				audioSource.Play ();
 				yield return new WaitForSeconds (audioSource.clip.length);
-				Application.LoadLevel ("Main");
+				SceneManager.LoadScene("Main");
 			} else {
 				Debug.Log ("登録ユーザーではない");
 			}

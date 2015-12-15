@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -77,7 +78,7 @@ public class JobSelect : MonoBehaviour
 
 	public void SendJobID()
 	{
-		Application.LoadLevel ("CharaMake");
+		SceneManager.LoadScene("CharaMake");
 	}
 
 }

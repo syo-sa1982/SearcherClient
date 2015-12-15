@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -123,7 +124,7 @@ public class SkillSet : MonoBehaviour
 		yield return www;
 		
 		
-		Application.LoadLevel ("Main");
+		SceneManager.LoadScene ("Main");
 	}
 
 
