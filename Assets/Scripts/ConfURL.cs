@@ -16,5 +16,9 @@ public static class ConfURL
 	public const string PLAYER_LIST = "player/list";
 	public const string PLAYER_SKILL_SETTING = "player/skill_setting";
 	public const string PLAYER_SKILL_SUBMIT = "player/skill_submit";
+	
+	public const string HOME_USER_INDEX = "home/user/info";
+	public const string HOME_SCENARIO_LIST = "home/scenario/list";
+	public const string HOME_PLAYER_LIST = "home/player/list";
 
 }
