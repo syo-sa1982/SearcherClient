@@ -43,6 +43,16 @@ public class HomeUI : CommonUI
 			
 			Debug.Log(www.text);
 			JsonData jsonData = LitJson.JsonMapper.ToObject(www.text);
+			
+			User userData = LitJson.JsonMapper.ToObject<User>(LitJson.JsonMapper.ToJson(jsonData["User"]));
+			Job job = LitJson.JsonMapper.ToObject<Job>(LitJson.JsonMapper.ToJson(jsonData["Job"]));
+			PlayerBase playerBase = LitJson.JsonMapper.ToObject<PlayerBase>(LitJson.JsonMapper.ToJson(jsonData["PlayerBase"]));
+			PlayerStatus playerStatus = LitJson.JsonMapper.ToObject<PlayerStatus>(LitJson.JsonMapper.ToJson(jsonData["PlayerStatus"]));
+			
+			Debug.Log(userData.Name);
+			Debug.Log(job.JobName);
+			Debug.Log(playerBase.ID);
+			Debug.Log(playerStatus.HP);
 		}
 	}
 	
