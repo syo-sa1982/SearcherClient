@@ -2,6 +2,14 @@
 using System;
 using System.Collections;
 
+public class User
+{
+	public int ID;
+	public string UUID;
+	public string Name;
+	public int RollCount;
+}
+
 public class Skill
 {
 	public int ID,CategoryID,Value;
