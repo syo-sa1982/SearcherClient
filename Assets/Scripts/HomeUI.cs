@@ -6,6 +6,10 @@ using LitJson;
 
 public class HomeUI : CommonUI 
 {
+	
+	[SerializeField]
+	private Text name, job;
+	
 
 	// Use this for initialization
 	void Start () 
