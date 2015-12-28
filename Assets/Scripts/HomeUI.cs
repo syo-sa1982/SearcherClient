@@ -8,7 +8,7 @@ public class HomeUI : CommonUI
 {
 	
 	[SerializeField]
-	private Text name, job;
+	private Text nameText, jobText;
 	
 
 	// Use this for initialization
@@ -57,6 +57,8 @@ public class HomeUI : CommonUI
 			Debug.Log(job.JobName);
 			Debug.Log(playerBase.ID);
 			Debug.Log(playerStatus.HP);
+			nameText.text = userData.Name;
+			jobText.text = job.JobName;
 		}
 	}
 	
