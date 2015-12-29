@@ -6,6 +6,10 @@ using LitJson;
 
 public class HomeUI : CommonUI 
 {
+	
+	[SerializeField]
+	private Text nameText, jobText, hpText, sanText;
+	
 
 	// Use this for initialization
 	void Start () 
@@ -53,6 +57,11 @@ public class HomeUI : CommonUI
 			Debug.Log(job.JobName);
 			Debug.Log(playerBase.ID);
 			Debug.Log(playerStatus.HP);
+			Debug.Log(playerStatus.Sanity);
+			nameText.text = userData.Name;
+			jobText.text = job.JobName;
+			hpText.text = playerStatus.HP.ToString();
+			sanText.text = playerStatus.Sanity.ToString();
 		}
 	}
 	
