@@ -15,7 +15,7 @@ public class ScenarioUI : CommonUI
 	
 	}
 	
-	void pushMockBtn()
+	public void pushMockBtn()
 	{
 		SceneManager.LoadScene ("QuestMap");
 	}
