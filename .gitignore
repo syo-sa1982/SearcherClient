@@ -18,7 +18,9 @@
 *.pidb.meta
 
 .vscode/
+
 2D Hand Painted - Dungeon Tileset/
+SoldiersPack/
 
 # Unity3D Generated File On Crash Reports
 sysinfo.txt
