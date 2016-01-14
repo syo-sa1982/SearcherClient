@@ -5,6 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 using MiniJSON;
+using LitJson;
 
 public class CharaMake : MonoBehaviour 
 {
@@ -99,6 +100,9 @@ public class CharaMake : MonoBehaviour
 		} else {
 			Debug.Log ("success");
 			Debug.Log (www.text);
+			JsonData jsonData = LitJson.JsonMapper.ToObject(www.text);
+			Debug.Log (jsonData);
+			
 			submitBtn.gameObject.SetActive (true);
 
 			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
