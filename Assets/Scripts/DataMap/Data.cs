@@ -29,6 +29,7 @@ public class Job
 	public int JobSkills;
 }
 
+[Serializable]
 public class PlayerBase
 {
 	public int ID,UserID,Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
@@ -42,14 +43,8 @@ public class PlayerStatus
 }
 
 [Serializable]
-public class RallData
+public class RollResult
 {
-	public string Strength = "6,3";
-	public string Constitution = "6,3";
-	public string Power = "6,3";
-	public string Dextality = "6,3";
-	public string Appeal = "6,3";
-	public string Size = "6,2,6";
-	public string Intelligence = "6,2,6";
-	public string Education   = "6,2,3";
+	public PlayerBase BaseStatus;
+	public Dictionary<string, int[]> DiceHistory;
 }

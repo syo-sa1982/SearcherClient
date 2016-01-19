@@ -84,28 +84,38 @@ public class CharaMake : MonoBehaviour
 	public IEnumerator GetDiceRollResult()
 	{
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
-		WWWForm form = new WWWForm ();
+		// WWWForm form = new WWWForm ();
 
-		foreach (KeyValuePair<string,string> data in RollDic) {
-			form.AddField (data.Key, data.Value);
-		}
-
-
-		WWW www = new WWW(url, form);
+		// foreach (KeyValuePair<string,string> data in RollDic) {
+		// 	form.AddField (data.Key, data.Value);
+		// }
+		// var rollData = new RallData();
+		// var json = JsonUtility.ToJson(rollData,true);
+		
+		// Debug.Log(json);
+		
+		// form.AddField ("rollData", json);
+		
+		WWW www = new WWW(url);
 
 		yield return www;
 
-		// if (www.error != null) {
-		// 	Debug.Log ("error");
-		// } else {
-		// 	Debug.Log ("success");
-		// 	Debug.Log (www.text);
+		if (www.error != null) {
+			Debug.Log ("error");
+		} else {
+			Debug.Log ("success");
+			Debug.Log (www.text);
 			
 		// 	Debug.Log (BaseStatus);
 			
 		// 	submitBtn.gameObject.SetActive (true);
 
-		// 	var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			var charaAPI = JsonUtility.FromJson<RollResult>(www.text);
+			
+			Debug.Log(charaAPI);
+			Debug.Log(charaAPI.BaseStatus.Appeal);
+			Debug.Log(charaAPI.DiceHistory["Strength"]);
+			
 
 		// 	var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
 		// 	var CharaStatusAPI = charaAPI ["CharaStatus"] as Dictionary<string,object>;
@@ -123,7 +133,7 @@ public class CharaMake : MonoBehaviour
 
 		// 		CharaStatus[data.Key].text = data.Value.ToString ();
 		// 	}
-		// }
+		}
 	}
 
 
