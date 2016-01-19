@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 
 public class User
 {
@@ -42,9 +43,17 @@ public class PlayerStatus
 	public int ID,UserID,PlayerID,JobID,MaxHP,MaxMP,HP,MP,Sanity,Luck,Idea,Knowledge,JobSkillPoint,HobbySkillPoint,DamageBonus;
 }
 
+
 [Serializable]
-public class RollResult
+public class CharamakeRollHistory
+{
+	public int[] Strength,Constitution,Power,Dextality,Appeal,Size,Intelligence,Education;
+}
+
+[Serializable]
+public class RollResult 
 {
 	public PlayerBase BaseStatus;
-	public Dictionary<string, int[]> DiceHistory;
+	public CharamakeRollHistory DiceHistory;
+	
 }

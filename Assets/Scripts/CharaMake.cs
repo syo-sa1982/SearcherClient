@@ -114,7 +114,9 @@ public class CharaMake : MonoBehaviour
 			
 			Debug.Log(charaAPI);
 			Debug.Log(charaAPI.BaseStatus.Appeal);
-			Debug.Log(charaAPI.DiceHistory["Strength"]);
+			Debug.Log(charaAPI.DiceHistory.Strength[0]);
+			Debug.Log(charaAPI.DiceHistory.Strength[1]);
+			Debug.Log(charaAPI.DiceHistory.Strength[2]);
 			
 
 		// 	var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
