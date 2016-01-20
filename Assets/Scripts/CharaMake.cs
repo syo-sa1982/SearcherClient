@@ -4,7 +4,8 @@ using UnityEngine.SceneManagement;
 using System.Collections;
 using System.Collections.Generic;
 
-using MiniJSON;
+// using MiniJSON;
+// using LitJson;
 
 public class CharaMake : MonoBehaviour 
 {
@@ -18,7 +19,7 @@ public class CharaMake : MonoBehaviour
 	[SerializeField]
 	private Button submitBtn;
 
-	private Dictionary<string, string> RollData;
+	private Dictionary<string, string> RollDic;
 	private Dictionary<string, InputField> BaseStatus;
 	private Dictionary<string, Text> CharaStatus;
 
@@ -34,7 +35,7 @@ public class CharaMake : MonoBehaviour
 		string roll2D6Plus6 = "6,2,6";// 2D6+6
 		string roll3D6Plus3 = "6,3,3";// 3D6+3
 
-		RollData = new Dictionary<string, string> () 
+		RollDic = new Dictionary<string, string> () 
 		{
 			{"Strength" , roll3D6 },
 			{"Constitution", roll3D6 },
@@ -83,14 +84,19 @@ public class CharaMake : MonoBehaviour
 	public IEnumerator GetDiceRollResult()
 	{
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
-		WWWForm form = new WWWForm ();
+		// WWWForm form = new WWWForm ();
 
-		foreach (KeyValuePair<string,string> data in RollData) {
-			form.AddField (data.Key, data.Value);
-		}
-
-
-		WWW www = new WWW(url, form);
+		// foreach (KeyValuePair<string,string> data in RollDic) {
+		// 	form.AddField (data.Key, data.Value);
+		// }
+		// var rollData = new RallData();
+		// var json = JsonUtility.ToJson(rollData,true);
+		
+		// Debug.Log(json);
+		
+		// form.AddField ("rollData", json);
+		
+		WWW www = new WWW(url);
 
 		yield return www;
 
@@ -99,26 +105,36 @@ public class CharaMake : MonoBehaviour
 		} else {
 			Debug.Log ("success");
 			Debug.Log (www.text);
-			submitBtn.gameObject.SetActive (true);
+			
+		// 	Debug.Log (BaseStatus);
+			
+		// 	submitBtn.gameObject.SetActive (true);
 
-			var charaAPI = MiniJSON.Json.Deserialize (www.text) as Dictionary<string,object>;
+			var charaAPI = JsonUtility.FromJson<RollResult>(www.text);
+			
+			Debug.Log(charaAPI);
+			Debug.Log(charaAPI.BaseStatus.Appeal);
+			Debug.Log(charaAPI.DiceHistory.Strength[0]);
+			Debug.Log(charaAPI.DiceHistory.Strength[1]);
+			Debug.Log(charaAPI.DiceHistory.Strength[2]);
+			
 
-			var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
-			var CharaStatusAPI = charaAPI ["CharaStatus"] as Dictionary<string,object>;
+		// 	var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
+		// 	var CharaStatusAPI = charaAPI ["CharaStatus"] as Dictionary<string,object>;
 
-			Debug.Log (BaseStatusAPI);
-			Debug.Log (CharaStatusAPI);
+		// 	Debug.Log (BaseStatusAPI);
+		// 	Debug.Log (CharaStatusAPI);
 
-			foreach(KeyValuePair<string, object> data in BaseStatusAPI) {
-				BaseStatus[data.Key].text = data.Value.ToString ();
-			}
-			foreach(KeyValuePair<string, object> data in CharaStatusAPI) {
+		// 	foreach(KeyValuePair<string, object> data in BaseStatusAPI) {
+		// 		BaseStatus[data.Key].text = data.Value.ToString ();
+		// 	}
+		// 	foreach(KeyValuePair<string, object> data in CharaStatusAPI) {
 
-				Debug.Log (data.Key);
-				Debug.Log (data.Value);
+		// 		Debug.Log (data.Key);
+		// 		Debug.Log (data.Value);
 
-				CharaStatus[data.Key].text = data.Value.ToString ();
-			}
+		// 		CharaStatus[data.Key].text = data.Value.ToString ();
+		// 	}
 		}
 	}
 
