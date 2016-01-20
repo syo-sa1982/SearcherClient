@@ -31,22 +31,6 @@ public class CharaMake : MonoBehaviour
 		Debug.Log (SelectJob);
 		submitBtn.gameObject.SetActive (false);
 
-		string roll3D6 = "6,3";// 3D6
-		string roll2D6Plus6 = "6,2,6";// 2D6+6
-		string roll3D6Plus3 = "6,3,3";// 3D6+3
-
-		RollDic = new Dictionary<string, string> () 
-		{
-			{"Strength" , roll3D6 },
-			{"Constitution", roll3D6 },
-			{"Power", roll3D6 },
-			{"Dextality", roll3D6 },
-			{"Appeal", roll3D6 },
-			{"Size", roll2D6Plus6 },
-			{"Intelligence", roll2D6Plus6 },
-			{"Education", roll3D6Plus3 },
-		};
-
 		BaseStatus = new Dictionary<string, InputField> ()
 		{
 			{"Strength", Strength},
@@ -114,9 +98,11 @@ public class CharaMake : MonoBehaviour
 			
 			Debug.Log(charaAPI);
 			Debug.Log(charaAPI.BaseStatus.Appeal);
+			Debug.Log(charaAPI.Status.MaxHP);
 			Debug.Log(charaAPI.DiceHistory.Strength[0]);
 			Debug.Log(charaAPI.DiceHistory.Strength[1]);
 			Debug.Log(charaAPI.DiceHistory.Strength[2]);
+			
 			
 
 		// 	var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
