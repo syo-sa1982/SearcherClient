@@ -18,6 +18,9 @@ public class CharaMake : MonoBehaviour
 
 	[SerializeField]
 	private Button submitBtn;
+	
+	private PlayerBase baseStatus;
+	private PlayerStatus status;
 
 	private Dictionary<string, string> RollDic;
 	private Dictionary<string, InputField> BaseStatus;
@@ -30,22 +33,6 @@ public class CharaMake : MonoBehaviour
 		SelectJob = PlayerPrefs.GetInt("jobid");
 		Debug.Log (SelectJob);
 		submitBtn.gameObject.SetActive (false);
-
-		string roll3D6 = "6,3";// 3D6
-		string roll2D6Plus6 = "6,2,6";// 2D6+6
-		string roll3D6Plus3 = "6,3,3";// 3D6+3
-
-		RollDic = new Dictionary<string, string> () 
-		{
-			{"Strength" , roll3D6 },
-			{"Constitution", roll3D6 },
-			{"Power", roll3D6 },
-			{"Dextality", roll3D6 },
-			{"Appeal", roll3D6 },
-			{"Size", roll2D6Plus6 },
-			{"Intelligence", roll2D6Plus6 },
-			{"Education", roll3D6Plus3 },
-		};
 
 		BaseStatus = new Dictionary<string, InputField> ()
 		{
@@ -105,39 +92,40 @@ public class CharaMake : MonoBehaviour
 		} else {
 			Debug.Log ("success");
 			Debug.Log (www.text);
-			
-		// 	Debug.Log (BaseStatus);
-			
-		// 	submitBtn.gameObject.SetActive (true);
-
 			var charaAPI = JsonUtility.FromJson<RollResult>(www.text);
 			
-			Debug.Log(charaAPI);
-			Debug.Log(charaAPI.BaseStatus.Appeal);
-			Debug.Log(charaAPI.DiceHistory.Strength[0]);
-			Debug.Log(charaAPI.DiceHistory.Strength[1]);
-			Debug.Log(charaAPI.DiceHistory.Strength[2]);
+			baseStatus = charaAPI.BaseStatus;
+			status = charaAPI.Status;
 			
-
-		// 	var BaseStatusAPI = charaAPI ["BaseStatus"] as Dictionary<string,object>;
-		// 	var CharaStatusAPI = charaAPI ["CharaStatus"] as Dictionary<string,object>;
-
-		// 	Debug.Log (BaseStatusAPI);
-		// 	Debug.Log (CharaStatusAPI);
-
-		// 	foreach(KeyValuePair<string, object> data in BaseStatusAPI) {
-		// 		BaseStatus[data.Key].text = data.Value.ToString ();
-		// 	}
-		// 	foreach(KeyValuePair<string, object> data in CharaStatusAPI) {
-
-		// 		Debug.Log (data.Key);
-		// 		Debug.Log (data.Value);
-
-		// 		CharaStatus[data.Key].text = data.Value.ToString ();
-		// 	}
+			InputBaseStatus(baseStatus);
+			InputStatus(status);
 		}
 	}
+	
+	public void InputBaseStatus(PlayerBase baseStatus)
+	{
+		Strength.text = baseStatus.Strength.ToString();
+		Constitution.text = baseStatus.Constitution.ToString();
+		Power.text = baseStatus.Power.ToString();
+		Dextality.text = baseStatus.Dextality.ToString();
+		Appeal.text = baseStatus.Appeal.ToString();
+		Size.text = baseStatus.Size.ToString();
+		Intelligence.text = baseStatus.Intelligence.ToString();
+		Education.text = baseStatus.Education.ToString();
+	}
 
+	public void InputStatus(PlayerStatus status)
+	{
+		Hp.text = status.HP.ToString();
+		Mp.text = status.MP.ToString();
+		Sanity.text = status.Sanity.ToString();
+		Luck.text = status.Luck.ToString();
+		Knowledge.text = status.Knowledge.ToString();
+		Idea.text = status.Idea.ToString();
+		JobSkillPoint.text = status.JobSkillPoint.ToString();
+		HobbySkillPoint.text = status.HobbySkillPoint.ToString();
+		DamageBonus.text = status.DamageBonus.ToString();
+	}
 
 
 	public void StatusSubmit()

@@ -38,6 +38,7 @@ public class PlayerBase
 	
 }
 
+[Serializable]
 public class PlayerStatus
 {
 	public int ID,UserID,PlayerID,JobID,MaxHP,MaxMP,HP,MP,Sanity,Luck,Idea,Knowledge,JobSkillPoint,HobbySkillPoint,DamageBonus;
@@ -54,6 +55,7 @@ public class CharamakeRollHistory
 public class RollResult 
 {
 	public PlayerBase BaseStatus;
+	public PlayerStatus Status;
 	public CharamakeRollHistory DiceHistory;
 	
 }
