@@ -146,9 +146,9 @@ public class CharaMake : MonoBehaviour
 		form.AddField ("UUID", _uuid);
 		form.AddField ("JobID", SelectJob);
 
-		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
-			form.AddField (data.Key, data.Value.text.ToString());
-		}
+		// foreach (KeyValuePair<string,InputField> data in BaseStatus) {
+		// 	form.AddField (data.Key, data.Value.text.ToString());
+		// }
 		WWW www = new WWW(url, form);
 
 		yield return www;
