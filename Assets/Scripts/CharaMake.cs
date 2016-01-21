@@ -70,21 +70,20 @@ public class CharaMake : MonoBehaviour
 
 	public IEnumerator GetDiceRollResult()
 	{
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
-		// WWWForm form = new WWWForm ();
-
-		// foreach (KeyValuePair<string,string> data in RollDic) {
-		// 	form.AddField (data.Key, data.Value);
-		// }
-		// var rollData = new RallData();
-		// var json = JsonUtility.ToJson(rollData,true);
 		
-		// Debug.Log(json);
+		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+		form.AddField ("JobID", SelectJob);
 		
-		// form.AddField ("rollData", json);
+		WWW www = new WWW(url, form);
 		
-		WWW www = new WWW(url);
-
 		yield return www;
 
 		if (www.error != null) {
