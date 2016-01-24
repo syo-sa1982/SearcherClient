@@ -98,6 +98,8 @@ public class CharaMake : MonoBehaviour
 			
 			InputBaseStatus(baseStatus);
 			InputStatus(status);
+			
+			submitBtn.gameObject.SetActive (true);
 		}
 	}
 	
@@ -140,15 +142,18 @@ public class CharaMake : MonoBehaviour
 		} else {
 			yield break;
 		}
+		
+		var data = new RollResult();
+		data.BaseStatus = baseStatus;
+		data.Status = status;
+		
+		 var jsonData = JsonUtility.ToJson(data,true); 
 
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
-		form.AddField ("JobID", SelectJob);
+		form.AddField ("data", jsonData);
 
-		// foreach (KeyValuePair<string,InputField> data in BaseStatus) {
-		// 	form.AddField (data.Key, data.Value.text.ToString());
-		// }
 		WWW www = new WWW(url, form);
 
 		yield return www;
@@ -157,7 +162,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			SceneManager.LoadScene("SkillSet");
+			// SceneManager.LoadScene("SkillSet");
 		}
 
 	}
