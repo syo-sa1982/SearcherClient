@@ -70,21 +70,20 @@ public class CharaMake : MonoBehaviour
 
 	public IEnumerator GetDiceRollResult()
 	{
+		string _uuid;
+		if (PlayerPrefs.HasKey ("uuid")) {
+			_uuid = PlayerPrefs.GetString ("uuid");
+		} else {
+			yield break;
+		}
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
-		// WWWForm form = new WWWForm ();
-
-		// foreach (KeyValuePair<string,string> data in RollDic) {
-		// 	form.AddField (data.Key, data.Value);
-		// }
-		// var rollData = new RallData();
-		// var json = JsonUtility.ToJson(rollData,true);
 		
-		// Debug.Log(json);
+		WWWForm form = new WWWForm ();
+		form.AddField ("UUID", _uuid);
+		form.AddField ("JobID", SelectJob);
 		
-		// form.AddField ("rollData", json);
+		WWW www = new WWW(url, form);
 		
-		WWW www = new WWW(url);
-
 		yield return www;
 
 		if (www.error != null) {
@@ -99,6 +98,8 @@ public class CharaMake : MonoBehaviour
 			
 			InputBaseStatus(baseStatus);
 			InputStatus(status);
+			
+			submitBtn.gameObject.SetActive (true);
 		}
 	}
 	
@@ -141,15 +142,18 @@ public class CharaMake : MonoBehaviour
 		} else {
 			yield break;
 		}
+		
+		var data = new RollResult();
+		data.BaseStatus = baseStatus;
+		data.Status = status;
+		
+		 var jsonData = JsonUtility.ToJson(data,true); 
 
 		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
-		form.AddField ("JobID", SelectJob);
+		form.AddField ("data", jsonData);
 
-		foreach (KeyValuePair<string,InputField> data in BaseStatus) {
-			form.AddField (data.Key, data.Value.text.ToString());
-		}
 		WWW www = new WWW(url, form);
 
 		yield return www;
@@ -158,7 +162,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			SceneManager.LoadScene("SkillSet");
+			// SceneManager.LoadScene("SkillSet");
 		}
 
 	}
