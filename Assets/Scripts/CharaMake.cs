@@ -162,7 +162,7 @@ public class CharaMake : MonoBehaviour
 			Debug.Log("Error");
 		} else {
 			Debug.Log("Success");
-			// SceneManager.LoadScene("SkillSet");
+			SceneManager.LoadScene("SkillSet");
 		}
 
 	}
