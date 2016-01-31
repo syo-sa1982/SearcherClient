@@ -31,7 +31,7 @@ public class JobSelect : MonoBehaviour
 			yield break;
 		}
 
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_JOBLIST;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_JOBLIST;
 
 		WWW www = new WWW(url);
 

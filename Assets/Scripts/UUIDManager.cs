@@ -60,7 +60,7 @@ public class UUIDManager : MonoBehaviour
 		Debug.Log ("AddNewUser");
 		Debug.Log (_uuid);
 
-		string url = ConfURL.URL_DEBUG+ConfURL.USER_ADD;
+		string url = ConfURL.HOST_NAME+ConfURL.USER_ADD;
 		WWWForm form = new WWWForm ();
 
 		form.AddField ("uuid", _uuid);

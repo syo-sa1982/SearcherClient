@@ -76,7 +76,7 @@ public class CharaMake : MonoBehaviour
 		} else {
 			yield break;
 		}
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_BASE_MAKE;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_BASE_MAKE;
 		
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
@@ -149,7 +149,7 @@ public class CharaMake : MonoBehaviour
 		
 		 var jsonData = JsonUtility.ToJson(data,true); 
 
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_GENERATE;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_GENERATE;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
 		form.AddField ("data", jsonData);
