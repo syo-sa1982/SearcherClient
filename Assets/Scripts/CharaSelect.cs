@@ -24,7 +24,7 @@ public class CharaSelect : MonoBehaviour {
 	{
 		Debug.Log ("GetCharaList");
 
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_LIST;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_LIST;
 		WWWForm form = new WWWForm ();
 
 		form.AddField ("UUID", _uuid);

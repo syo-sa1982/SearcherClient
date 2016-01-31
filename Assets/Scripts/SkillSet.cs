@@ -53,7 +53,7 @@ public class SkillSet : MonoBehaviour
 			yield break;
 		}
 
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SETTING;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_SKILL_SETTING;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
 
@@ -106,7 +106,7 @@ public class SkillSet : MonoBehaviour
 		} else {
 			yield break;
 		}
-		string url = ConfURL.URL_DEBUG+ConfURL.PLAYER_SKILL_SUBMIT;
+		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_SKILL_SUBMIT;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
 
@@ -124,7 +124,7 @@ public class SkillSet : MonoBehaviour
 		yield return www;
 		
 		
-		SceneManager.LoadScene ("Main");
+		SceneManager.LoadScene ("Home");
 	}
 
 

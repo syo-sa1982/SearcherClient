@@ -4,9 +4,8 @@ using System.Collections;
 
 public static class ConfURL
 {
-
-	public const string URL_DEBUG = "http://localhost/";
-	public const string URL_RELEASE = "";
+	private const bool IS_DEBUG = true;
+	public const string HOST_NAME = IS_DEBUG ? "http://localhost/" : "http://ik1-302-11287.vs.sakura.ne.jp/";
 	public const string USER_AUTH = "user/auth";
 	public const string USER_ADD  = "user/add";
 

@@ -32,7 +32,7 @@ public class Title : MonoBehaviour {
 		_uuid = PlayerPrefs.GetString ("uuid");
 		Debug.Log (_uuid);
 
-		string url = ConfURL.URL_DEBUG + ConfURL.USER_AUTH;
+		string url = ConfURL.HOST_NAME + ConfURL.USER_AUTH;
 		WWWForm form = new WWWForm();
 
 		form.AddField ("uuid", _uuid);
@@ -59,7 +59,7 @@ public class Title : MonoBehaviour {
 				Debug.Log ("登録ユーザーです");
 				audioSource.Play ();
 				yield return new WaitForSeconds (audioSource.clip.length);
-				SceneManager.LoadScene("Main");
+				SceneManager.LoadScene("Home");
 			} else {
 				Debug.Log ("登録ユーザーではない");
 			}

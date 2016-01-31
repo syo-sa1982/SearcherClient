@@ -18,10 +18,10 @@ public class CommonUI : MonoBehaviour {
 	{
 		switch(SceneNumber){
 			case 1:
-				SceneManager.LoadScene("CharaSelect");
+				SceneManager.LoadScene("Home");
 				break;
 			case 2:
-				SceneManager.LoadScene("CharaSelect");
+				SceneManager.LoadScene("Scenario");
 				break;
 			case 3:
 				SceneManager.LoadScene("CharaSelect");

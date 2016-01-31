@@ -32,7 +32,7 @@ public class HomeUI : CommonUI
 			yield break;
 		}
 		
-		string url = ConfURL.URL_DEBUG+ConfURL.HOME_USER_INDEX;
+		string url = ConfURL.HOST_NAME+ConfURL.HOME_USER_INDEX;
 		WWWForm form = new WWWForm ();
 		form.AddField ("UUID", _uuid);
 
