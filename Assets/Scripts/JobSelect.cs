@@ -18,6 +18,7 @@ public class JobSelect : MonoBehaviour
 	// Use this for initialization
 	void Start () 
 	{
+			Debug.Log ("test");
 		submitBtn.gameObject.SetActive (false);
 		StartCoroutine (showJobList());
 	}
@@ -31,6 +32,7 @@ public class JobSelect : MonoBehaviour
 			yield break;
 		}
 
+			Debug.Log ("test");
 		string url = ConfURL.HOST_NAME+ConfURL.PLAYER_JOBLIST;
 
 		WWW www = new WWW(url);
