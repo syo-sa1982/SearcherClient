@@ -18,7 +18,8 @@
 *.pidb.meta
 
 .vscode/
-
+Assets/UnityTestTools/*
+Assets/UnityTestTools.meta
 2D Hand Painted - Dungeon Tileset/
 SoldiersPack/
 UnityChan/
